@@ -61,7 +61,7 @@ public class ControladorInsertar {
 			napolitana.setTcoccion(20);
 			servicioPizza.guardarPizza(napolitana);
 			
-			return new ModelAndView("redirect:/menu");			
+			return new ModelAndView("redirect:/home");			
 		}
 		
 		@RequestMapping("/insertarPedidos")
@@ -104,7 +104,7 @@ public class ControladorInsertar {
 			tercerpedido.setListaPizzas(pizzastercerpedido);
 			servicioPedido.guardarPedido(tercerpedido);
 			
-			return new ModelAndView("redirect:/menu");			
+			return new ModelAndView("redirect:/home");			
 		}			
 	
 }

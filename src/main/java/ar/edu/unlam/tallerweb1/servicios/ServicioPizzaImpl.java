@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.dao.PizzaDao;
+
 import ar.edu.unlam.tallerweb1.modelo.Pizza;
 
 @Service("servicioPizza")
@@ -31,4 +32,15 @@ public class ServicioPizzaImpl implements ServicioPizza {
 	public Pizza traerUnaPizzaPorSuNombre(String string) {
 		return servicioPizzaDao.traerUnaPizzaPorSuNombre(string);
 	}
+
+	@Override
+	public Pizza traerUnaPizzaPorSuId(Long id) {
+		return servicioPizzaDao.traerUnaPizzaPorSuId(id);
+	}
+
+	@Override
+	public void guardarLaPizzaEnCarrito(Pizza pizza) {
+		servicioPizzaDao.guardarLaPizzaEnCarrito(pizza);
+	}
+
 }

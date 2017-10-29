@@ -19,6 +19,8 @@ public class Pizza {
 	private String imagen;
 	private Integer precio;
 	private Integer tcoccion;	
+	private Integer cantidad;
+	private Boolean aniadida;
 	private Boolean tamanio;
 	private String aclaracion;	
 	private List<Ingrediente> listaIngrediente = new LinkedList<Ingrediente>();
@@ -100,5 +102,21 @@ public class Pizza {
 	public void setAclaracion(String aclaracion) {
 		this.aclaracion = aclaracion;
 	}
-	
+
+	public Integer getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(Integer cantidad) {
+		this.cantidad = cantidad;
+	}
+
+	public Boolean getAniadida() {
+		return aniadida;
+	}
+
+	public void setAniadida(Boolean aniadida) {
+		this.aniadida = aniadida;
+	}
+		
 }

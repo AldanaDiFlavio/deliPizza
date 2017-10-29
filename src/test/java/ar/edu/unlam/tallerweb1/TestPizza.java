@@ -23,7 +23,7 @@ public class TestPizza extends SpringTest{
 	@Rollback(false)
 	public void testInsertarPizza() {
 		
-		/*Preparacio)*/ 
+		/*Preparacion*/ 
 	Session session = getSession();
 	Boolean grande=true;
 	Boolean chica=false;

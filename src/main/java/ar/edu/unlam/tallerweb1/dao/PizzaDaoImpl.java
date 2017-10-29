@@ -42,5 +42,18 @@ public class PizzaDaoImpl implements PizzaDao {
 		 
 	}
 
+	@Override
+	public Pizza traerUnaPizzaPorSuId(Long id) {
+		 return (Pizza) ( sessionFactory.getCurrentSession()
+				 .createCriteria(Pizza.class)
+				 .add(Restrictions.eq("id", id))
+				 .uniqueResult());
+	}
+
+	@Override
+	public void guardarLaPizzaEnCarrito(Pizza pizza) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

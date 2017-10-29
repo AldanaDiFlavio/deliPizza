@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -30,20 +29,90 @@
 			            <div class="title">
 			                <h2>Menú</h2>
 			                
-			                <div class="row">
-			                	<c:forEach items = "${pizzas}" var="pizzas">
-			                		<div class="col-sm-2 col-sm-offset-1">
-	                        			<img src="images/pizzas/${pizzas.imagen}" alt="imagen no encontrada" class="img-circle img-raised img-responsive">
-	                    			</div>
-	                   				<div class="text">
-	                                	<h3>${pizzas.nombre}</h3>
-	                                    <p class="buttons">	                                        
-	                                    	<a href="agregaramipedido?id=${pizzas.id}" class="btn btn-default">Agregar a mi Pedido</a>         
-	                                    </p>
-		                            </div>
+			                <div class="col-md-10">
+			                
+			               
+			                
+			                	<c:forEach items = "${listaPizzas}" var="listaPizzas">
+			                	
+			                	
+				                	<div class="col-sm-4 col-sm-6">
+		                        		<img src="images/pizzas/${listaPizzas.imagen}" alt="imagen no encontrada" class="img-rounded img-responsive">	                              
+		                                 <pre><h3>${listaPizzas.nombre} $${listaPizzas.precio}</h3></pre>
+		                                
+		                                 
+	                                      <%-- <a href="aniadirCarrito/${listaPizzas.nombre}/5" class="btn btn-warning">Agregar a mi Pedido</a>	 --%>
+	                                      
+	                                     
+	                               
+		                            
+		                        	  <form:form method="POST" modelAttribute="lapizza" action="aniadirCarrito">
+		                        	   <form:input path="nombre" name="nombre" type="hidden" value="${listaPizzas.nombre}" />
+		                        	   <form:select path="cantidad" class="form-control">
+											<form:options items="${numeros}" />
+										</form:select>		                        	   
+									    <c:choose>
+										  <c:when test="${nombresdepizzas.nombre == listaPizzas.nombre}">
+										    <button type="submit" class="btn btn-warning">Modificar mi Pedido</button>
+										  </c:when>
+										  <c:otherwise>									     
+										      <button type="submit" class="btn btn-warning">Agregar a mi Pedido</button>
+										  </c:otherwise>
+										</c:choose>		   								                     	   
+		                        	  </form:form>	
+		                        	</div>  
                        			</c:forEach>
+                       		 
+                       			
+                       			
 			                </div>
-
+			                
+			                <div class="col-md-2">
+			                	 <h2><u>Su pedido</u></h2>
+			                	  <c:choose>		   		                              				                              				
+								            <c:when test="${not empty pizzasdelpedidorealizado}">
+								            	<div class="name">Nombre: ${pizzasdelpedidorealizado.nombre}</div>
+								            </c:when>
+			                	   </c:choose>
+			                	 <h6><a>Cancelar pedido</a></h6>		                	 			                	 
+			                	 <ul>
+			                	
+								   <c:choose>		   		                              				                              				
+								            <c:when test="${not empty pizzaspedidas}">
+								            <form action="validar-pedido" method="POST"> 	
+								            
+			                					 <c:forEach items = "${pizzaspedidas}" var="pizzaspedidas">
+			                	 
+			                	 
+			                	 					<!-- Lo saque de pedidos ya, pero no puedo hacer que meta el valor el cliente 
+								                	   <li id="2021416" title="Editar" class="modified seen" data-auto="shopdetails_cart_item">
+												            <div class="productQuantity dropdown" title="Seleccionar cantidad">
+												                <select name="qty_2021416" class="" id="qty_2021416">
+																		<option value="1" selected="selected">1</option>
+																		<option value="2">2</option>
+																 </select> 
+																 -->
+																
+																 															
+															       	 
+											                	 <div class="name">Nombre: ${pizzaspedidas.nombre}</div>
+								           						 <div class="price" style="display: block;">Precio: ${pizzaspedidas.precio}</div>
+								           						 <div class="price" style="display: block;">Cantidad: ${pizzaspedidas.cantidad}</div>
+								           						 <div class="name"><a href="quitarDelCarrito?nombre=${pizzaspedidas.nombre}">Remover</a></div>
+								           												           						 
+								               			</li></br> 	 
+			                	 				 </c:forEach>    
+			                	 				 
+			                	 				  <button type="submit" class="btn btn-warning">Confirmar Pedido</button>
+			                	 				 
+			                	 		   </form>	
+			                	 		   </c:when>
+			                	   </c:choose>
+			                	   						       
+								</ul>
+							 </div> 
+			                </div>
+			                
 			            </div>
 		            </div>
 	            </div>
