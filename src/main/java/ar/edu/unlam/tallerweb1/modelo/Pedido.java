@@ -22,8 +22,8 @@ public class Pedido {
 	private String solicitante;
 	private String direccion;
 	private Integer telefono;
-//	private Date fecha;
-	private Integer cantidad;
+	private Integer demora;
+	private Integer precio;
 	private Boolean estado;	
 	
 	@ManyToMany(fetch = FetchType.EAGER) 
@@ -42,7 +42,6 @@ public class Pedido {
 		this.solicitante = solicitante;
 		this.direccion = direccion;
 		this.telefono = telefono;
-		this.cantidad = cantidad;
 		this.estado = estado;
 		this.listaPizzas = listaPizzas;
 	}
@@ -96,22 +95,20 @@ public class Pedido {
 		this.estado = estado;
 	}
 
-	public Integer getCantidad() {
-		return cantidad;
+	public Integer getDemora() {
+		return demora;
 	}
 
-	public void setCantidad(Integer cantidad) {
-		this.cantidad = cantidad;
+	public void setDemora(Integer demora) {
+		this.demora = demora;
 	}
 
-	
-//	public Date getFecha() {
-//		return fecha;
-//	}
-//
-//	public void setFecha(Date fecha) {
-//		this.fecha = fecha;
-//	}
+	public Integer getPrecio() {
+		return precio;
+	}
 
+	public void setPrecio(Integer precio) {
+		this.precio = precio;
+	}
 	
 }

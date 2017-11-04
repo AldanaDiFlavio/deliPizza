@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-
+ 	<script src="js/jquery-1.11.3.min.js"></script>
 	<script src="js/jquery.min.js" type="text/javascript"></script>
 	<script src="js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="js/material.min.js"></script>
@@ -31,3 +31,5 @@
 
 		});
 	</script>
+	
+	<script defer type="text/javascript" src="js/js.js"></script>

@@ -20,6 +20,7 @@ public class Pizza {
 	private Integer precio;
 	private Integer tcoccion;	
 	private Integer cantidad;
+	private Integer preciototal;
 	private Boolean aniadida;
 	private Boolean tamanio;
 	private String aclaracion;	
@@ -117,6 +118,14 @@ public class Pizza {
 
 	public void setAniadida(Boolean aniadida) {
 		this.aniadida = aniadida;
+	}
+
+	public Integer getPreciototal() {
+		return preciototal;
+	}
+
+	public void setPreciototal(Integer preciototal) {
+		this.preciototal = preciototal;
 	}
 		
 }

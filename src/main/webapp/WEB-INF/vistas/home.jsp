@@ -27,7 +27,8 @@
 				<div class="section section-basic">
 	    			<div class="container">
 			            <div class="title">
-			                <h2>Menú</h2>
+			                <h1>Menú</h1>
+			                <hr>
 			                
 			                <div class="col-md-10">
 			                
@@ -52,7 +53,7 @@
 											<form:options items="${numeros}" />
 										</form:select>		                        	   
 									    <c:choose>
-										  <c:when test="${nombresdepizzas.nombre == listaPizzas.nombre}">
+										  <c:when test="${listaPizzas.aniadida == true}">
 										    <button type="submit" class="btn btn-warning">Modificar mi Pedido</button>
 										  </c:when>
 										  <c:otherwise>									     
@@ -68,42 +69,40 @@
 			                </div>
 			                
 			                <div class="col-md-2">
-			                	 <h2><u>Su pedido</u></h2>
+			                	 <h2>Su pedido</h2>
+			                	 <hr>
+			                	 
 			                	  <c:choose>		   		                              				                              				
-								            <c:when test="${not empty pizzasdelpedidorealizado}">
-								            	<div class="name">Nombre: ${pizzasdelpedidorealizado.nombre}</div>
+								            <c:when test="${not empty pedidorealizado}">
+								            
+								            	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCrear">PEDIDO EN CURSO</button>
+								            	
+								            	
+								            <hr> 	
 								            </c:when>
 			                	   </c:choose>
-			                	 <h6><a>Cancelar pedido</a></h6>		                	 			                	 
+			                	  
+			                	 <h5><a href="cancelarCarrito">VACIAR LISTA</a></h5>
+			                	  <hr>	
+			                	 <h5>TOTAL: ${preciototalportodaslaspizzas}</h5>
+			                	  <hr>	                	 			                	 
 			                	 <ul>
 			                	
 								   <c:choose>		   		                              				                              				
 								            <c:when test="${not empty pizzaspedidas}">
-								            <form action="validar-pedido" method="POST"> 	
+								            <form action="mostrar-pedido" method="POST"> 	
 								            
 			                					 <c:forEach items = "${pizzaspedidas}" var="pizzaspedidas">
-			                	 
-			                	 
-			                	 					<!-- Lo saque de pedidos ya, pero no puedo hacer que meta el valor el cliente 
-								                	   <li id="2021416" title="Editar" class="modified seen" data-auto="shopdetails_cart_item">
-												            <div class="productQuantity dropdown" title="Seleccionar cantidad">
-												                <select name="qty_2021416" class="" id="qty_2021416">
-																		<option value="1" selected="selected">1</option>
-																		<option value="2">2</option>
-																 </select> 
-																 -->
-																
-																 															
-															       	 
+			                	 																													       	 
 											                	 <div class="name">Nombre: ${pizzaspedidas.nombre}</div>
-								           						 <div class="price" style="display: block;">Precio: ${pizzaspedidas.precio}</div>
+								           						 <div class="price" style="display: block;">Precio: $${pizzaspedidas.preciototal}</div>
 								           						 <div class="price" style="display: block;">Cantidad: ${pizzaspedidas.cantidad}</div>
-								           						 <div class="name"><a href="quitarDelCarrito?nombre=${pizzaspedidas.nombre}">Remover</a></div>
+								           						 <div class="name"><a href="quitarDelCarrito?nombre=${pizzaspedidas.nombre}">REMOVER</a></div>
+												 <hr>
 								           												           						 
-								               			</li></br> 	 
 			                	 				 </c:forEach>    
 			                	 				 
-			                	 				  <button type="submit" class="btn btn-warning">Confirmar Pedido</button>
+			                	 				  <button type="submit" class="btn btn-warning">Reservar Pedido</button>
 			                	 				 
 			                	 		   </form>	
 			                	 		   </c:when>
@@ -117,7 +116,47 @@
 		            </div>
 	            </div>
            </div>
-		</div>
+			 
+			                	    <div id="ModalCrear" class="modal fade" role="dialog" style="overflow-y: scroll;">
+					                    <div class="modal-dialog">
+					                        <div class="modal-content">
+					
+					                            <form class="form-horizontal" role="form" id="form-crear">
+					                                <div class="modal-body">
+					                                 <c:choose>		   		                              				                              				
+								            <c:when test="${not empty pedidorealizado}">
+								            
+								            	
+								            	
+								            	 <c:forEach items = "${pedidorealizado}" var="pedidorealizado">
+			                	 							     <h2>Datos del pedido</h2>			   
+			                	 							      <c:forEach items = "${pedidorealizado.listaPizzas}" var="listaPizzas">	
+			                	 							      	<div class="name">Contiene: ${listaPizzas.nombre} X ${listaPizzas.cantidad}</div><hr>  			                	 	
+			                	 							       </c:forEach>		
+			                	 							     <div class="name">Total a pagar: ${pedidorealizado.precio}</div><hr>														       	 
+											                	 <div class="name">Pedido por: ${pedidorealizado.solicitante}</div>	<hr>	
+											                	 <div class="name">Direccion: ${pedidorealizado.direccion}</div>	<hr>	
+											                	 <div class="name">Telefono: ${pedidorealizado.telefono}</div>	<hr>	
+											                	 <div class="name">Estado del pedido: </div>	<hr>	
+											                	 <div class="name">Demora aproximada: </div>	<hr>						           						
+												 			
+								           												           						 
+			                	 				 </c:forEach>    
+								            	
+								            </c:when>
+			                	   </c:choose>
+			                	   
+					                                </div>
+					                                <div class="modal-footer">
+					                                    <button type="button" class="btn btn-default" data-dismiss="modal">
+					                                        <span class="glyphicon glyphicon-remove"></span>
+					                                        <span class="hidden-xs">Cerrar</span>
+					                                    </button>
+					                                </div>
+					                            </form>
+					                        </div>
+					                    </div>
+					                </div>	
     <jsp:include page="/includes/footer.jsp"></jsp:include>
 	</body>
 </html>

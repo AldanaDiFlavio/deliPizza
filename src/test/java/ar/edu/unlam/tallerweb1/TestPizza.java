@@ -323,7 +323,6 @@ public class TestPizza extends SpringTest{
 		primerpedido.setTelefono(1162343596);
 		primerpedido.setDireccion("Florencio Varela 699");
 //		primerpedido.setFecha(22-10-17);
-		primerpedido.setCantidad(2);
 		primerpedido.setEstado(false);
 		
 
@@ -345,7 +344,6 @@ public class TestPizza extends SpringTest{
 		segundopedido.setTelefono(1533839081);
 		segundopedido.setDireccion("Marmol 9879");
 //		segundopedido.setFecha(22-10-17);
-		segundopedido.setCantidad(5);
 		segundopedido.setEstado(false);
 		
 

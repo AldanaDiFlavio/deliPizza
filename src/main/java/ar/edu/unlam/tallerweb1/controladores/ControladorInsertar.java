@@ -29,7 +29,7 @@ public class ControladorInsertar {
 			Pizza calabresa = new Pizza();
 			calabresa.setNombre("calabresa");
 			calabresa.setImagen("calabresa.jpg");
-			calabresa.setPrecio(150);
+			calabresa.setPrecio(100);
 			calabresa.setTcoccion(20);
 			servicioPizza.guardarPizza(calabresa);
 			
