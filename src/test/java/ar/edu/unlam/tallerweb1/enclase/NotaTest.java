@@ -1,9 +1,10 @@
-package ar.edu.unlam.tallerweb1;
+package ar.edu.unlam.tallerweb1.enclase;
 
 import org.junit.Assert;
 
 import org.junit.Test;
 
+import ar.edu.unlam.tallerweb1.SpringTest;
 import ar.edu.unlam.tallerweb1.modelo.Nota;
 
 

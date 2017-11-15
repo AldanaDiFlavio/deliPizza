@@ -32,6 +32,12 @@ public class ControladorMenu {
 
 	@RequestMapping("/home")
 	public ModelAndView irAHome(HttpServletRequest request, HttpServletResponse response) {
+		
+		List<Pizza> lPizzas = servicioPizza.traerTodasLasPizzas();
+		
+		if (lPizzas.isEmpty()) {
+			return new ModelAndView("redirect:/insertar-pizzas");
+		} else { 			
 
 		Integer preciototalportodaslaspizzas = 0;
 
@@ -58,10 +64,7 @@ public class ControladorMenu {
 			modelo.put("pizzaspedidasparamodificar", listClave);
 		}
 
-		ArrayList<Integer> numeros = new ArrayList<Integer>();
-		for (int i = 1, j = i + 10; i < 100; i++) {
-			numeros.add(i);
-		}
+		ArrayList<Integer> numeros = (ArrayList<Integer>) servicioPizza.traerListaDeNumeros();
 
 		modelo.put("numeros", numeros);
 
@@ -96,7 +99,8 @@ public class ControladorMenu {
 		}
 		return new ModelAndView("home", modelo);
 	}
-
+	 }
+	
 	@RequestMapping(path = "/aniadirCarrito", method = RequestMethod.POST)
 	public ModelAndView aniadirCarrito(@ModelAttribute("lapizza") Pizza lapizza, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -166,6 +170,7 @@ public class ControladorMenu {
 		modelo.put("nombresdepizzas", listClave);
 
 		return new ModelAndView("redirect:/home");
+		
 	}
 
 	@RequestMapping(path = "/quitarDelCarrito", method = RequestMethod.GET)

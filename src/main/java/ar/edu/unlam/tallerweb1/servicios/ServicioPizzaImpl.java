@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -41,6 +42,16 @@ public class ServicioPizzaImpl implements ServicioPizza {
 	@Override
 	public void guardarLaPizzaEnCarrito(Pizza pizza) {
 		servicioPizzaDao.guardarLaPizzaEnCarrito(pizza);
+	}
+
+	@Override
+	public List<Integer> traerListaDeNumeros() {
+		ArrayList<Integer> numeros = new ArrayList<Integer>();
+		for (int i = 1; i < 100; i++) {
+			numeros.add(i);
+		}
+		return numeros;
+		
 	}
 
 }

@@ -15,4 +15,7 @@ public interface ServicioPizza {
 	Pizza traerUnaPizzaPorSuId(Long id);
 
 	void guardarLaPizzaEnCarrito(Pizza pizza);
+	
+	List<Integer> traerListaDeNumeros();
+	
 }

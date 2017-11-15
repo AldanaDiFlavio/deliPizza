@@ -21,7 +21,7 @@
 		    <div class="collapse navbar-collapse" id="navigation-index">
 		    	<ul class="nav navbar-nav navbar-right">
 					<li>
-						<a href="#">Login</a>
+						<a href="login">Login</a>
 					</li>
 					<li>
 						<a href="#">Registro</a>
