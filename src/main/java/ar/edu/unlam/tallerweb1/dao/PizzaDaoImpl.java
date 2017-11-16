@@ -21,7 +21,7 @@ public class PizzaDaoImpl implements PizzaDao {
 	@Override
 	public List<Pizza> traerTodasLasPizzas() {
 		
-		return( sessionFactory.getCurrentSession()
+		return(sessionFactory.getCurrentSession()
 				.createCriteria(Pizza.class)
 				.list());	
 	}

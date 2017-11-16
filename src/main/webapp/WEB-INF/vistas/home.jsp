@@ -38,7 +38,7 @@
 							<c:forEach items="${listaPizzas}" var="listaPizzas">
 
 
-								<div class="col-sm-4 col-sm-6" style="margin-bottom: 5%" >								
+								<div class="col-sm-4 col-sm-6" style="margin-bottom: 5%">
 									<img src="images/pizzas/${listaPizzas.imagen}"
 										alt="imagen no encontrada" class="img-rounded img-responsive">
 									<span>
@@ -54,7 +54,7 @@
 									<form:form method="POST" modelAttribute="lapizza"
 										action="aniadirCarrito">
 										<form:input path="nombre" name="nombre" type="hidden"
-											value="${listaPizzas.nombre}" />
+											value="${listaPizzas.nombre} " />
 										<form:select path="cantidad" class="form-control">
 											<form:options items="${numeros}" />
 										</form:select>
@@ -69,7 +69,7 @@
 											</c:otherwise>
 										</c:choose>
 									</form:form>
-								</div>								
+								</div>
 							</c:forEach>
 
 
@@ -77,9 +77,12 @@
 						</div>
 
 						<div class="col-md-2">
-							<h2>Su pedido</h2>
-							<hr>
-
+							<c:choose>
+								<c:when test="${not empty pizzaspedidas}">
+									<h2>Su pedido</h2>
+									<hr>
+								</c:when>
+							</c:choose>
 							<c:choose>
 								<c:when test="${not empty pedidorealizado}">
 
@@ -96,11 +99,23 @@
 							</c:choose>
 
 							<h5>
-								<a href="cancelarCarrito">VACIAR LISTA</a>
+								<c:choose>
+									<c:when test="${not empty pizzaspedidas}">
+
+										<button type="button" class="btn btn-simple"
+											data-toggle="modal" data-target="#ModalCrear">
+											<a data-toggle="tooltip" data-placement="top"
+												title="Eliminar pedido" href="cancelarCarrito"><i
+												class="material-icons" style="font-size: 40px">delete</i></a>
+										</button>
+										<hr>
+										<h5>TOTAL: ${preciototalportodaslaspizzas}</h5>
+										<hr>
+									</c:when>
+								</c:choose>
 							</h5>
-							<hr>
-							<h5>TOTAL: ${preciototalportodaslaspizzas}</h5>
-							<hr>
+
+
 							<ul>
 
 								<c:choose>

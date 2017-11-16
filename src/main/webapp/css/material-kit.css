@@ -3621,10 +3621,10 @@ h2.title {
 }
 
 .index-page .wrapper > .header {
-  height: 90vh;
+  height: 60vh;
 }
 .index-page .brand {
-  margin-top: 30vh;
+  margin-top: 10vh;
   color: #FFFFFF;
   text-align: center;
 }
