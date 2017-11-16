@@ -4,10 +4,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import static org.mockito.Mockito.*;
+import ar.edu.unlam.tallerweb1.modelo.enclase.Tambor;
+import ar.edu.unlam.tallerweb1.modelo.enclase.Tragamonedas;
 
-import ar.edu.unlam.tallerweb1.modelo.Tambor;
-import ar.edu.unlam.tallerweb1.modelo.Tragamonedas;
+import static org.mockito.Mockito.*;
 
 public class TestTragamonedas {
 

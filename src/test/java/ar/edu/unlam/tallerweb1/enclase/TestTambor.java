@@ -3,7 +3,8 @@ package ar.edu.unlam.tallerweb1.enclase;
 import org.junit.Test;
 
 import ar.edu.unlam.tallerweb1.SpringTest;
-import ar.edu.unlam.tallerweb1.modelo.Tambor;
+import ar.edu.unlam.tallerweb1.modelo.enclase.Tambor;
+
 // Libreria de assersiones - que junit no tiene, ya esta incluida en el proyecto base
 import static org.assertj.core.api.Assertions.*;
 

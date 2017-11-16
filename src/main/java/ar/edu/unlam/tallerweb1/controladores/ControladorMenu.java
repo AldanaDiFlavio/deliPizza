@@ -20,8 +20,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unlam.tallerweb1.modelo.Moto;
 import ar.edu.unlam.tallerweb1.modelo.Pedido;
 import ar.edu.unlam.tallerweb1.modelo.Pizza;
+import ar.edu.unlam.tallerweb1.servicios.ServicioMoto;
+import ar.edu.unlam.tallerweb1.servicios.ServicioPedido;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPizza;
 
 @Controller
@@ -29,6 +32,12 @@ public class ControladorMenu {
 
 	@Inject
 	private ServicioPizza servicioPizza;
+	
+	@Inject
+	private ServicioPedido servicioPedido;
+	
+	@Inject
+	private ServicioMoto servicioMoto;
 
 	@RequestMapping("/home")
 	public ModelAndView irAHome(HttpServletRequest request, HttpServletResponse response) {
@@ -274,8 +283,7 @@ public class ControladorMenu {
 	}
 
 	@RequestMapping(path = "/validar-pedido", method = RequestMethod.POST)
-	public ModelAndView validarPedido(@ModelAttribute("pedido") Pedido pedido, HttpServletRequest request,
-			HttpServletResponse response) {
+	public ModelAndView validarPedido(@ModelAttribute("pedido") Pedido pedido, HttpServletRequest request, HttpServletResponse response) {
 
 		Integer preciototal = 0;
 
@@ -319,8 +327,50 @@ public class ControladorMenu {
 		}
 
 		pedido.setListaPizzas(pedidorealmostrar);
-		pedido.setPrecio(preciototal);
-		// pedido es el que hay que persistir
+		
+		pedido.setPrecio(preciototal);	
+		
+		Pedido pedidorealpersistir = new Pedido();
+		pedidorealpersistir.setSolicitante(pedido.getSolicitante());
+		pedidorealpersistir.setDireccion(pedido.getDireccion());
+		pedidorealpersistir.setPrecio(pedido.getPrecio());
+		pedidorealpersistir.setTelefono(pedido.getTelefono());
+		pedidorealpersistir.setListaPizzas(pedidoreal);
+				
+		
+		List<Moto> todaslasmotos = servicioMoto.traerTodasLasMotos();
+		
+		Integer demora;
+		
+		String patente = "B124ACD"; // USAR SERVICIOS YAAA
+		/*
+		for (Moto motos : todaslasmotos) {
+			
+			List<Pedido> pedlist = motos.getlistaPedido();
+			
+			if(pedlist.isEmpty()){ 
+				patente = motos.getPatente();
+			}else if(pedlist.size() <1){ 
+					patente = motos.getPatente();
+				}else if(pedlist.size() <2){ 
+					patente = motos.getPatente();
+				}else{ 
+					demora = 20;
+				}
+	 
+			}*/
+		
+		
+		Moto moto = new Moto();
+		if(patente != "no"){
+		moto = servicioMoto.traerUnaMotoPorSuPatente(patente);
+		}
+		
+	
+		pedidorealpersistir.setMoto(moto);
+		
+		servicioPedido.guardarPedido(pedidorealpersistir);
+		
 		pedidos.add(pedido);
 
 		sesion.setAttribute("pedidos", pedidos);

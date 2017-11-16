@@ -180,7 +180,7 @@ if(inputDireccion == ''){
     $("#direccion").focus().after("<span class='error'>Ingrese su direccion</span>");
 };
 
-if(inputDireccion!=''){
+if(inputDireccion!='' && inputDireccion!=' ' && inputDireccion!='  ' && inputDireccion!='   '){
 	
 	 var url = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyA2mfgpfvZWDfry05R1F52Gj8V_zBGeYbo&q='+inputDireccion;',Buenos+Aires'
      $("#mapa iframe").attr('src', url);

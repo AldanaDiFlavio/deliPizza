@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 
 @Entity
@@ -26,9 +27,21 @@ public class Pedido {
 	private Integer precio;
 	private Boolean estado;	
 	
-	@ManyToMany(fetch = FetchType.EAGER) 
+	@ManyToMany(fetch = FetchType.LAZY) 
 	@JoinTable(name = "pedidos_pizzas", joinColumns = { @JoinColumn(name = "id_Pedido") }, inverseJoinColumns = { @JoinColumn(name = "id_Pizza") })
 	private List<Pizza> listaPizzas = new LinkedList<Pizza>();
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_Moto", nullable = true)
+	private Moto moto;
+	
+	public Moto getMoto() {
+		return moto;
+	}
+
+	public void setMoto(Moto moto) {
+		this.moto = moto;
+	}
 			
 	public Pedido() {
 		super();

@@ -16,8 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.SpringTest;
 import ar.edu.unlam.tallerweb1.controladores.ControladorLogin;
-
-import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.enclase.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
 
 public class TestControladorLogin extends SpringTest{

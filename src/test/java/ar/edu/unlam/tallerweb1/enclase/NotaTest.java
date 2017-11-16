@@ -5,7 +5,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import ar.edu.unlam.tallerweb1.SpringTest;
-import ar.edu.unlam.tallerweb1.modelo.Nota;
+import ar.edu.unlam.tallerweb1.modelo.enclase.Nota;
 
 
 public class NotaTest extends SpringTest {
