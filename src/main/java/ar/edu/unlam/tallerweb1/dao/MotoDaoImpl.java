@@ -22,6 +22,12 @@ public class MotoDaoImpl implements MotoDao {
 		final Session session = sessionFactory.getCurrentSession();
 		session.save(moto);		
 	}
+	
+	@Override
+	public void actualizarMoto(Moto moto) {
+		final Session session = sessionFactory.getCurrentSession();
+		session.update(moto);		
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override

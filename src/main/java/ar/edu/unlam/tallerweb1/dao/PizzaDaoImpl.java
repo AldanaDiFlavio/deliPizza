@@ -50,10 +50,4 @@ public class PizzaDaoImpl implements PizzaDao {
 				 .uniqueResult());
 	}
 
-	@Override
-	public void guardarLaPizzaEnCarrito(Pizza pizza) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

@@ -25,7 +25,7 @@ public class Pedido {
 	private Integer telefono;
 	private Integer demora;
 	private Integer precio;
-	private Boolean estado;	
+	private String estado;	
 	
 	@ManyToMany(fetch = FetchType.LAZY) 
 	@JoinTable(name = "pedidos_pizzas", joinColumns = { @JoinColumn(name = "id_Pedido") }, inverseJoinColumns = { @JoinColumn(name = "id_Pizza") })
@@ -48,7 +48,7 @@ public class Pedido {
 
 	}
 	
-	public Pedido(Long id, String solicitante, String direccion, Integer telefono, Integer cantidad, Boolean estado,
+	public Pedido(Long id, String solicitante, String direccion, Integer telefono, Integer cantidad, String estado,
 			List<Pizza> listaPizzas) {
 		super();
 		this.id = id;
@@ -100,11 +100,11 @@ public class Pedido {
 	}
 	
 	
-	public Boolean getEstado() {
+	public String getEstado() {
 		return estado;
 	}
 
-	public void setEstado(Boolean estado) {
+	public void setEstado(String estado) {
 		this.estado = estado;
 	}
 

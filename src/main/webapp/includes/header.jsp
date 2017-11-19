@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 	<!-- Navbar -->
@@ -14,18 +15,24 @@
 		    	</button>
 	        	<div class="logo-container">
 	                <div class="logo">
-	                    <img src="images/logos/deli-pizza.png">
+	                    <a href="home"><img src="images/logos/deli-pizza.png"></a>
 	                </div>
 				</div>
 	    	</div>
 		    <div class="collapse navbar-collapse" id="navigation-index">
 		    	<ul class="nav navbar-nav navbar-right">
-					<li>
-						<a href="login">Login</a>
-					</li>
-					<li>
-						<a href="#">Registro</a>
-					</li>
+		    		<c:choose>
+	            		<c:when test="${usuario.user != null}">
+		                	<li><a href="#"style="color: white">${usuario.user}</a></li>
+		                    <li><a href="administrar">Administrar</a></li>
+		                    <li><a href="cerrarSesion">Salir</a></li>
+	            		</c:when>
+	            		<c:otherwise>
+		                	<li>
+								<a href="login">Login</a>
+							</li>
+	            		</c:otherwise>
+            		</c:choose>
 <!-- 					<li> -->
 <!-- 						<a rel="tooltip" title="Follow us on Twitter" data-placement="bottom" href="#" target="_blank" class="btn btn-white btn-simple btn-just-icon"> -->
 <!-- 							<i class="fa fa-twitter"></i> -->

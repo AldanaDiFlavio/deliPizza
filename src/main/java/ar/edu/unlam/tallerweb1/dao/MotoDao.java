@@ -13,5 +13,7 @@ public interface MotoDao {
 	Moto traerUnaMotoPorSuPatente(String patente);
 
 	Moto traerUnaMotoPorSuId(Long id);
+
+	void actualizarMoto(Moto moto);
 	
 }

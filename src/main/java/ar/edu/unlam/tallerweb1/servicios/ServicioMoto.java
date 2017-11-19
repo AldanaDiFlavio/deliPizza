@@ -13,5 +13,14 @@ public interface ServicioMoto {
 	Moto traerUnaMotoPorSuPatente(String patente);
 
 	Moto traerUnaMotoPorSuId(Long id);
+
+	Moto consultarSiHayMotosLibres();
+
+	void actualizarMoto(Moto moto);
 	
+	List<Moto> traerListaDeMotosOcupadas();
+
+	List<Moto> traerListaDeMotosLibres();
+
+	void liberarMotoDePedido(Moto moto);
 }

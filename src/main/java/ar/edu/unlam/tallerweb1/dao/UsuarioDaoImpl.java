@@ -5,7 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import ar.edu.unlam.tallerweb1.modelo.enclase.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
 import javax.inject.Inject;
 
@@ -31,6 +31,12 @@ public class UsuarioDaoImpl implements UsuarioDao {
 				.add(Restrictions.eq("email", usuario.getEmail()))
 				.add(Restrictions.eq("password", usuario.getPassword()))
 				.uniqueResult();
+	}
+
+	@Override
+	public void guardarUsuario(Usuario usuario) {
+		final Session session = sessionFactory.getCurrentSession();
+		session.save(usuario);			
 	}
 
 }

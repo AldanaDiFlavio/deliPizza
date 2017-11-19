@@ -16,9 +16,10 @@ public class Moto {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_Moto")
 	private Long id;
-	private String patente;	
-	
-	
+	private String patente;
+	private String conductor;
+	private String estado;
+		
 	public Long getId() {
 		return id;
 	}
@@ -26,7 +27,7 @@ public class Moto {
 		this.id = id;
 	}
 		
-	@OneToMany(mappedBy = "moto", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "moto", fetch = FetchType.EAGER)
 	private List<Pedido> listaPedido = new LinkedList<Pedido>();
 
 	public void setlistaPedido(List<Pedido> listaPedido) {
@@ -42,5 +43,18 @@ public class Moto {
 	public void setPatente(String patente) {
 		this.patente = patente;
 	}
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+	public String getConductor() {
+		return conductor;
+	}
+	public void setConductor(String conductor) {
+		this.conductor = conductor;
+	}
+
 		
 }

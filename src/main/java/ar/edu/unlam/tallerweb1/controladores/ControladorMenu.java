@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unlam.tallerweb1.modelo.Moto;
 import ar.edu.unlam.tallerweb1.modelo.Pedido;
 import ar.edu.unlam.tallerweb1.modelo.Pizza;
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioMoto;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPedido;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPizza;
@@ -32,27 +33,22 @@ public class ControladorMenu {
 
 	@Inject
 	private ServicioPizza servicioPizza;
-	
+
 	@Inject
 	private ServicioPedido servicioPedido;
-	
+
 	@Inject
 	private ServicioMoto servicioMoto;
 
 	@RequestMapping("/home")
 	public ModelAndView irAHome(HttpServletRequest request, HttpServletResponse response) {
-		
-		List<Pizza> lPizzas = servicioPizza.traerTodasLasPizzas();
-		
-		if (lPizzas.isEmpty()) {
-			return new ModelAndView("redirect:/insertar-pizzas");
-		} else { 			
-
-		Integer preciototalportodaslaspizzas = 0;
 
 		ModelMap modelo = new ModelMap();
+		//suma el precio de todas las pizza en el pedido, inicializado en 0
+		Integer preciototalportodaslaspizzas = 0;
+		//clase Pizza
 		Pizza lapizza = new Pizza();
-
+		
 		List<Pizza> listClave = new LinkedList<Pizza>();
 		List<Integer> listValor = new LinkedList<Integer>();
 		if (request.getSession().getAttribute("carrito") != null) {
@@ -63,7 +59,8 @@ public class ControladorMenu {
 				Map.Entry<Pizza, Integer> e = (Map.Entry) it.next();
 				Pizza clave = e.getKey();
 				Integer valor = e.getValue();
-				preciototalportodaslaspizzas = preciototalportodaslaspizzas + (clave.getPrecio() * clave.getCantidad());
+				preciototalportodaslaspizzas = preciototalportodaslaspizzas
+						+ (clave.getPrecio() * clave.getCantidad());
 				listClave.add(clave);
 				listValor.add(valor);
 			}
@@ -72,25 +69,17 @@ public class ControladorMenu {
 			modelo.put("pizzaspedidas", listClave);
 			modelo.put("pizzaspedidasparamodificar", listClave);
 		}
+		
 
-		ArrayList<Integer> numeros = (ArrayList<Integer>) servicioPizza.traerListaDeNumeros();
-
-		modelo.put("numeros", numeros);
-
-		List<Pizza> listaPizzas;
-		if (listClave.isEmpty()) {
-			listaPizzas = servicioPizza.traerTodasLasPizzas();
-		} else { // no funca verrrrrr
-			listaPizzas = servicioPizza.traerTodasLasPizzas();
-
-			for (Pizza lp : listClave) {
-				for (Pizza lc : listClave) {
-					if (lp.getNombre() == lc.getNombre()) {
-						lp.setAniadida(true);
-					}
+		//lista de pizzas
+		List<Pizza> listaPizzas= servicioPizza.traerTodasLasPizzas();
+		
+		for (Pizza lp : listClave) {
+			for (Pizza lc : listClave) {
+				if (lp.getNombre() == lc.getNombre()) {
+					lp.setAniadida(true);
 				}
 			}
-
 		}
 
 		modelo.put("preciototalportodaslaspizzas", preciototalportodaslaspizzas);
@@ -108,8 +97,7 @@ public class ControladorMenu {
 		}
 		return new ModelAndView("home", modelo);
 	}
-	 }
-	
+
 	@RequestMapping(path = "/aniadirCarrito", method = RequestMethod.POST)
 	public ModelAndView aniadirCarrito(@ModelAttribute("lapizza") Pizza lapizza, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -179,7 +167,7 @@ public class ControladorMenu {
 		modelo.put("nombresdepizzas", listClave);
 
 		return new ModelAndView("redirect:/home");
-		
+
 	}
 
 	@RequestMapping(path = "/quitarDelCarrito", method = RequestMethod.GET)
@@ -283,94 +271,77 @@ public class ControladorMenu {
 	}
 
 	@RequestMapping(path = "/validar-pedido", method = RequestMethod.POST)
-	public ModelAndView validarPedido(@ModelAttribute("pedido") Pedido pedido, HttpServletRequest request, HttpServletResponse response) {
-
-		Integer preciototal = 0;
+	public ModelAndView validarPedido(@ModelAttribute("pedido") Pedido pedido, HttpServletRequest request,
+			HttpServletResponse response) {
 
 		ModelMap modelo = new ModelMap();
 
 		HttpSession sesion2 = request.getSession();
+
 		HttpSession sesion = request.getSession();
 
 		Map<Pizza, Integer> carrito;
 		carrito = (Map<Pizza, Integer>) sesion.getAttribute("carrito");
 
-		List<Pizza> listClave = new LinkedList<Pizza>();
-		Iterator it = carrito.entrySet().iterator();
-		while (it.hasNext()) {
-			Map.Entry<Pizza, Integer> e = (Map.Entry) it.next();
-			Pizza clave = e.getKey();
-			Integer valor = e.getValue();
-			listClave.add(clave);
-		}
+		List<Pizza> listClave = servicioPizza.generarListaDePizzasDelCarrito(carrito);
 
-		Pizza lapizzaa = new Pizza();
-		List<Pizza> pedidoreal = new LinkedList<Pizza>(); // Persistir
-		for (Pizza p : listClave) {
-			for (int j = 0; j < p.getCantidad(); j++) {
-				lapizzaa = servicioPizza.traerUnaPizzaPorSuNombre(p.getNombre());
-				pedidoreal.add(lapizzaa);
-			}
-		}
+		List<Pizza> pizzasDelPedidoParaPersistir = servicioPizza
+				.generarListaDePizzasParaPersistirAPartirDeLaListaDePizzasDelCarrito(listClave); // Genera
+																									// la
+																									// lista
+																									// de
+																									// Pizzas
+																									// para
+																									// persistir
+																									// a
+																									// partir
+																									// de
+																									// la
+																									// lista
+																									// de
+																									// pizzas
+																									// que
+																									// se
+																									// pusieron
+																									// en
+																									// el
+																									// Carrito
 
-		List<Pizza> pedidorealmostrar = new LinkedList<Pizza>(); // Para Mostrar
-		for (Pizza p : listClave) {
-			preciototal = preciototal + (p.getPrecio() * p.getCantidad());
-			pedidorealmostrar.add(p);
-		}
+		List<Pizza> pizzasDelPedidoParaMostrar = servicioPizza
+				.generarListaDePizzasParaMostrarAlClienteAPartirDeLaListaDePizzasDelCarrito(listClave);
 
-		LinkedList<Pedido> pedidos;
+		Integer preciodelpedido = servicioPizza.calcularPrecioDelPedidoApartirDeLaListaDePizzasDelCarrito(listClave);
+
+		LinkedList<Pedido> pedidos; // Genero la session de pedidos para poder
+									// mostrarla al cliente
 		if (sesion.getAttribute("pedidos") == null) {
 			pedidos = new LinkedList<Pedido>();
 		} else {
 			pedidos = (LinkedList<Pedido>) sesion2.getAttribute("pedidos");
 		}
 
-		pedido.setListaPizzas(pedidorealmostrar);
-		
-		pedido.setPrecio(preciototal);	
-		
-		Pedido pedidorealpersistir = new Pedido();
-		pedidorealpersistir.setSolicitante(pedido.getSolicitante());
-		pedidorealpersistir.setDireccion(pedido.getDireccion());
-		pedidorealpersistir.setPrecio(pedido.getPrecio());
-		pedidorealpersistir.setTelefono(pedido.getTelefono());
-		pedidorealpersistir.setListaPizzas(pedidoreal);
-				
-		
-		List<Moto> todaslasmotos = servicioMoto.traerTodasLasMotos();
-		
-		Integer demora;
-		
-		String patente = "B124ACD"; // USAR SERVICIOS YAAA
-		/*
-		for (Moto motos : todaslasmotos) {
-			
-			List<Pedido> pedlist = motos.getlistaPedido();
-			
-			if(pedlist.isEmpty()){ 
-				patente = motos.getPatente();
-			}else if(pedlist.size() <1){ 
-					patente = motos.getPatente();
-				}else if(pedlist.size() <2){ 
-					patente = motos.getPatente();
-				}else{ 
-					demora = 20;
-				}
-	 
-			}*/
-		
-		
-		Moto moto = new Moto();
-		if(patente != "no"){
-		moto = servicioMoto.traerUnaMotoPorSuPatente(patente);
+		// pedido --> Es el pedido del cliente que viene del form de pedidos.jsp
+
+		pedido.setListaPizzas(pizzasDelPedidoParaMostrar);
+
+		pedido.setPrecio(preciodelpedido);
+
+		// pedidoParaPersistir --> Es el pedido que voy a persistir // Genera el
+		// pedido para persistir // pedidoParaPersistir.setEstado(false); //
+		// EnEspera
+		Pedido pedidoParaPersistir = servicioPedido.generarPedidoParaPersistirConLasPizzasDelPedido(pedido,
+				pizzasDelPedidoParaPersistir);
+
+		Moto moto = servicioMoto.consultarSiHayMotosLibres();
+		if (moto.getEstado().equals("Libre")) { // Si hay almenos una moto Libre
+			pedidoParaPersistir.setMoto(moto);
+			pedidoParaPersistir.setEstado("EnDelivery"); // Esta En Delivery
+			moto.setEstado("Ocupada"); // Paso la moto a Ocupada
+			servicioMoto.actualizarMoto(moto);
 		}
-		
-	
-		pedidorealpersistir.setMoto(moto);
-		
-		servicioPedido.guardarPedido(pedidorealpersistir);
-		
+
+		servicioPedido.guardarPedido(pedidoParaPersistir);
+
 		pedidos.add(pedido);
 
 		sesion.setAttribute("pedidos", pedidos);
@@ -392,4 +363,60 @@ public class ControladorMenu {
 		return new ModelAndView("pedidos", modelo);
 	}
 
+	@RequestMapping("/administrar")
+	public ModelAndView panelAdministrador(HttpServletRequest request, HttpServletResponse response) {
+
+		if (request.getSession().getAttribute("usuario") != null) {
+
+			ModelMap modelo = new ModelMap();
+
+			List<Moto> motos = servicioMoto.traerTodasLasMotos();
+			List<Moto> motosocupadas = servicioMoto.traerListaDeMotosOcupadas();
+			List<Moto> motoslibres = servicioMoto.traerListaDeMotosLibres();
+			List<Pedido> ListaDePedidosEnEspera = servicioPedido.traerListaDePedidosEnEspera();
+
+			modelo.put("motos", motos);
+			modelo.put("motoslibres", motoslibres);
+			modelo.put("motosocupadas", motosocupadas);
+			modelo.put("listadepedio", motosocupadas);
+			modelo.put("pedidosenespera", ListaDePedidosEnEspera);
+			return new ModelAndView("administrar", modelo);
+		}
+		return new ModelAndView("redirect:/login");
+	}
+
+	@RequestMapping(path = "/liberar-moto")
+	public ModelAndView desadherirseBandas(@RequestParam("patente") String patente, HttpServletRequest request) {
+
+		if (request.getSession().getAttribute("usuario") != null) {
+
+			Moto moto = servicioMoto.traerUnaMotoPorSuPatente(patente);
+
+			servicioMoto.liberarMotoDePedido(moto);
+
+			List<Pedido> listaPedido = moto.getlistaPedido();
+			listaPedido.clear();
+			moto.setlistaPedido(listaPedido);
+
+			servicioMoto.actualizarMoto(moto);
+
+			List<Pedido> ListaDePedidosEnEspera = servicioPedido.traerListaDePedidosEnEspera();
+
+			if (!ListaDePedidosEnEspera.isEmpty()) {
+				Pedido pedido = ListaDePedidosEnEspera.get(0);
+				pedido.setMoto(moto);
+
+				pedido.setEstado("EnDelivery");
+				servicioPedido.actualizarPedido(pedido);
+				moto.setEstado("Ocupada");
+				List<Pedido> listaPedidos = moto.getlistaPedido();
+				listaPedidos.add(pedido);
+				moto.setlistaPedido(listaPedidos);
+				servicioMoto.actualizarMoto(moto);
+			}
+
+			return new ModelAndView("redirect:/administrar");
+		}
+		return new ModelAndView("redirect:/login");
+	}
 }

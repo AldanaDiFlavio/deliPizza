@@ -42,7 +42,7 @@
 									<img src="images/pizzas/${listaPizzas.imagen}"
 										alt="imagen no encontrada" class="img-rounded img-responsive">
 									<span>
-										<h3>${listaPizzas.nombre} $${listaPizzas.precio}</h3>
+										<h3>${listaPizzas.nombre}$${listaPizzas.precio}</h3>
 									</span>
 
 
@@ -56,7 +56,9 @@
 										<form:input path="nombre" name="nombre" type="hidden"
 											value="${listaPizzas.nombre} " />
 										<form:select path="cantidad" class="form-control">
-											<form:options items="${numeros}" />
+											<c:forEach var="cantidadPizzas" begin="1" end="20">
+												<form:option value="${cantidadPizzas}" >${cantidadPizzas}</form:option>
+											</c:forEach>
 										</form:select>
 										<c:choose>
 											<c:when test="${listaPizzas.aniadida == true}">

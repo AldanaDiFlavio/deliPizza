@@ -13,7 +13,5 @@ public interface PizzaDao {
 	Pizza traerUnaPizzaPorSuNombre(String string);
 
 	Pizza traerUnaPizzaPorSuId(Long id);
-
-	void guardarLaPizzaEnCarrito(Pizza pizza);
 	
 }

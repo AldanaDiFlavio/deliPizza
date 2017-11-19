@@ -1,4 +1,4 @@
-package ar.edu.unlam.tallerweb1.modelo.enclase;
+package ar.edu.unlam.tallerweb1.modelo;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,6 +16,7 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	private String user;
 	// para el resto de los atributo no se usan anotaciones entonces se usa el default de hibernate: la columna se llama igual que
 	// el atributo, la misma admite nulos, y el tipo de dato se deduce del tipo de dato de java.
 	private String email;
@@ -27,6 +28,12 @@ public class Usuario {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public String getUser() {
+		return user;
+	}
+	public void setUser(String user) {
+		this.user = user;
 	}
 	public String getEmail() {
 		return email;
@@ -48,4 +55,5 @@ public class Usuario {
 	public void setRol(String rol) {
 		this.rol = rol;
 	}
+
 }

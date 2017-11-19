@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 
 
 import ar.edu.unlam.tallerweb1.modelo.Ingrediente;
-import ar.edu.unlam.tallerweb1.modelo.Pizza;
 
 @Repository("ingredienteDao")
 public class IngredienteDaoImpl implements IngredienteDao {
