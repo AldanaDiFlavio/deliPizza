@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.dao;
 
 import ar.edu.unlam.tallerweb1.modelo.Moto;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -35,6 +36,7 @@ public class MotoDaoImpl implements MotoDao {
 		
 		return( sessionFactory.getCurrentSession()
 				.createCriteria(Moto.class)
+				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
 				.list());	
 	}
 

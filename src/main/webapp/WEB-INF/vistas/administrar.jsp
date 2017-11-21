@@ -19,7 +19,7 @@
 						</div>
 						<div class="content">
 							<c:choose>
-								<c:when test="${not empty motos}">
+								<c:when test="${not empty motosocupadas}">
 									<div class="table-responsive">
 										<table class="table table-hover">
 											<h2>Motos Ocupadas</h2>
@@ -30,26 +30,27 @@
 													<th>Direccion</th>
 													<th>Solicitante</th>
 													<th>Telefono</th>
-													<th>Precio</th>	
-													<th>Demora Informada</th>													
+													<th>Precio</th>
+													<th>Demora Informada</th>
 													<th>Liberar Moto</th>
 												</tr>
 											</thead>
 											<tbody>
 
 												<c:forEach items="${motosocupadas}" var="motosocupadas">
-													<tr> 
+													<tr>
 														<th>${motosocupadas.patente}</th>
 														<th>${motosocupadas.conductor}</th>
 														<c:forEach items="${motosocupadas.listaPedido}"
-															var="listaPedido">															
+															var="listaPedido">
 															<th>${listaPedido.direccion}</th>
 															<th>${listaPedido.solicitante}</th>
 															<th>${listaPedido.telefono}</th>
 															<th>${listaPedido.precio}</th>
 															<th>${listaPedido.demora}</th>
 														</c:forEach>
-														<td><a href="liberar-moto?patente=${motosocupadas.patente}"
+														<td><a
+															href="liberar-moto?patente=${motosocupadas.patente}"
 															class="btn btn-primary">Liberar</a></td>
 													</tr>
 												</c:forEach>
@@ -93,15 +94,26 @@
 												<table class="table table-hover">
 													<thead>
 														<tr>
-															<th>Patente</th>
-															<th>Conductor</th>
+															<th><span  class="lead">Patente</span></th>
+															<th><span  class="lead">Conductor</span></th>
+															<th><span  class="lead">Pedidos Entregados</span></th>
 														</tr>
 													</thead>
 													<tbody>
-														<c:forEach items="${motoslibres}" var="i">
+														<c:forEach items="${motoslibres}" var="motoslibres">
 															<tr>
-																<th>${i.patente}</th>
-																<th>${i.conductor}</th>
+																<th><span class="lead bg-danger" >${motoslibres.patente}</span></th>
+																<th><span class="lead bg-danger">${motoslibres.conductor}</span></th>
+																<c:choose>
+																<c:when test="${not empty motoslibres.listaPedido}">
+																<c:forEach items="${motoslibres.listaPedido}"
+																	var="listaPedido">
+																	<th><span class="lead bg-info">${listaPedido.solicitante} /</span><span class="lead bg-success">  ${listaPedido.direccion} /</span><span class="lead bg-warning"> ${listaPedido.telefono}</span></th>
+																</c:forEach>
+																</c:when>
+																<c:otherwise><th><span class="lead bg-info">No tuvo pedidos aún</span></th>
+																</c:otherwise>
+																</c:choose>
 															</tr>
 														</c:forEach>
 													</tbody>

@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.dao;
 
 import java.util.List;
 
+import ar.edu.unlam.tallerweb1.modelo.Moto;
 import ar.edu.unlam.tallerweb1.modelo.Pedido;
 
 public interface PedidoDao {
@@ -11,5 +12,7 @@ public interface PedidoDao {
 	void guardarPedido(Pedido pedido);
 
 	void actualizarPedido(Pedido pedido);
+
+	Pedido traerElPedidoEnDeliveryAsignadoAUnaMoto(Moto moto);
 
 }

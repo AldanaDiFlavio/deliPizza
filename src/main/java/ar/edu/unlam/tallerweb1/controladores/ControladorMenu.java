@@ -338,7 +338,7 @@ public class ControladorMenu {
 			pedidoParaPersistir.setEstado("EnDelivery"); // Esta En Delivery
 			moto.setEstado("Ocupada"); // Paso la moto a Ocupada
 			servicioMoto.actualizarMoto(moto);
-		}
+		} // Caso contrario agarro motos ocupadas las recorro y informo un promedio de la demora aproximada
 
 		servicioPedido.guardarPedido(pedidoParaPersistir);
 
@@ -393,10 +393,10 @@ public class ControladorMenu {
 			Moto moto = servicioMoto.traerUnaMotoPorSuPatente(patente);
 
 			servicioMoto.liberarMotoDePedido(moto);
+			Pedido ped = servicioPedido.traerElPedidoEnDeliveryAsignadoAUnaMoto(moto);
+			ped.setEstado("Entregado");
+			servicioPedido.actualizarPedido(ped);
 
-			List<Pedido> listaPedido = moto.getlistaPedido();
-			listaPedido.clear();
-			moto.setlistaPedido(listaPedido);
 
 			servicioMoto.actualizarMoto(moto);
 

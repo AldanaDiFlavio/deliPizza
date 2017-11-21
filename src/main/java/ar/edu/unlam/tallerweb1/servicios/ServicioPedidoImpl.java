@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.dao.PedidoDao;
+import ar.edu.unlam.tallerweb1.modelo.Moto;
 import ar.edu.unlam.tallerweb1.modelo.Pedido;
 import ar.edu.unlam.tallerweb1.modelo.Pizza;
 
@@ -59,6 +60,11 @@ public class ServicioPedidoImpl implements ServicioPedido {
 			}
 		}
 		return pedido;
+	}
+
+	@Override
+	public Pedido traerElPedidoEnDeliveryAsignadoAUnaMoto(Moto moto) {
+		return servicioPedidoDao.traerElPedidoEnDeliveryAsignadoAUnaMoto(moto);
 	}
 	
 	

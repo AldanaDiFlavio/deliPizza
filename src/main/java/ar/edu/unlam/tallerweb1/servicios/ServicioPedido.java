@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.servicios;
 
 import java.util.List;
 
+import ar.edu.unlam.tallerweb1.modelo.Moto;
 import ar.edu.unlam.tallerweb1.modelo.Pedido;
 import ar.edu.unlam.tallerweb1.modelo.Pizza;
 
@@ -16,5 +17,7 @@ public interface ServicioPedido {
 	List<Pedido> traerListaDePedidosEnEspera();
 
 	void actualizarPedido(Pedido pedido);
+
+	Pedido traerElPedidoEnDeliveryAsignadoAUnaMoto(Moto moto);
 	
 }

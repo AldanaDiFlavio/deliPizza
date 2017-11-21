@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Moto {	
+public class Moto implements Comparable<Moto>{	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_Moto")
@@ -56,5 +56,17 @@ public class Moto {
 		this.conductor = conductor;
 	}
 
+	@Override
+	public int compareTo(Moto o) {
+		  int resultado=0;
+	        if (this.listaPedido.size()<o.listaPedido.size()) {   resultado = -1;      }
+	        else if (this.listaPedido.size()>o.listaPedido.size()) {    resultado = 1;      }
+	        else {
+	            if (this.listaPedido.size()<o.listaPedido.size()) {  resultado = -1;    }
+	            else if (this.listaPedido.size()>o.listaPedido.size()) {   resultado = 1;   }
+	            else {   resultado = 0;   }
+	        }
+	        return resultado;
+	    }
 		
 }
