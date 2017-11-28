@@ -249,7 +249,7 @@
 									.route(
 											{
 												origin : inputDireccion
-														+ ', Buenos Aires ',
+														+ ', caba ',
 												destination : 'Florencio Varela 1903, San Justo',
 												travelMode : google.maps.TravelMode.DRIVING
 											},

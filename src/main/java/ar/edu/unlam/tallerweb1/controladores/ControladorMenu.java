@@ -23,7 +23,6 @@ import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unlam.tallerweb1.modelo.Moto;
 import ar.edu.unlam.tallerweb1.modelo.Pedido;
 import ar.edu.unlam.tallerweb1.modelo.Pizza;
-import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioMoto;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPedido;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPizza;
@@ -287,26 +286,7 @@ public class ControladorMenu {
 
 		List<Pizza> pizzasDelPedidoParaPersistir = servicioPizza
 				.generarListaDePizzasParaPersistirAPartirDeLaListaDePizzasDelCarrito(listClave); // Genera
-																									// la
-																									// lista
-																									// de
-																									// Pizzas
-																									// para
-																									// persistir
-																									// a
-																									// partir
-																									// de
-																									// la
-																									// lista
-																									// de
-																									// pizzas
-																									// que
-																									// se
-																									// pusieron
-																									// en
-																									// el
-																									// Carrito
-
+																						// Carrito
 		List<Pizza> pizzasDelPedidoParaMostrar = servicioPizza
 				.generarListaDePizzasParaMostrarAlClienteAPartirDeLaListaDePizzasDelCarrito(listClave);
 
@@ -341,7 +321,7 @@ public class ControladorMenu {
 		} // Caso contrario agarro motos ocupadas las recorro y informo un promedio de la demora aproximada
 
 		servicioPedido.guardarPedido(pedidoParaPersistir);
-
+		pedido.setEstado(pedidoParaPersistir.getEstado());
 		pedidos.add(pedido);
 
 		sesion.setAttribute("pedidos", pedidos);

@@ -57,7 +57,7 @@
 											value="${listaPizzas.nombre} " />
 										<form:select path="cantidad" class="form-control">
 											<c:forEach var="cantidadPizzas" begin="1" end="20">
-												<form:option value="${cantidadPizzas}" >${cantidadPizzas}</form:option>
+												<form:option value="${cantidadPizzas}">${cantidadPizzas}</form:option>
 											</c:forEach>
 										</form:select>
 										<c:choose>
@@ -104,8 +104,7 @@
 								<c:choose>
 									<c:when test="${not empty pizzaspedidas}">
 
-										<button type="button" class="btn btn-simple"
-											data-toggle="modal" data-target="#ModalCrear">
+										<button type="button" class="btn btn-simple">
 											<a data-toggle="tooltip" data-placement="top"
 												title="Eliminar pedido" href="cancelarCarrito"><i
 												class="material-icons" style="font-size: 40px">delete</i></a>
@@ -174,7 +173,7 @@
 											${listaPizzas.cantidad}</div>
 										<hr>
 									</c:forEach>
-									<div>Total a pagar: ${pedidorealizado.precio}</div>
+									<div>Total a pagar: $${pedidorealizado.precio}</div>
 									<hr>
 									<div>Pedido por: ${pedidorealizado.solicitante}</div>
 									<hr>
@@ -182,9 +181,9 @@
 									<hr>
 									<div>Telefono: ${pedidorealizado.telefono}</div>
 									<hr>
-									<div>Estado del pedido:</div>
+									<div>Estado del pedido: ${pedidorealizado.estado}</div>
 									<hr>
-									<div>Demora aproximada:</div>
+									<div>Demora aproximada: ${pedidorealizado.demora}</div>
 									<hr>
 
 

@@ -80,7 +80,7 @@ public class ControladorLogin {
 			// Fijarme si va a la pantalla login y que en modelo variable error con ese valor
 			model.put("usuario", usuarioBuscado);
 			
-			return new ModelAndView("redirect:/home");
+			return new ModelAndView("redirect:/administrar");
 		} else {
 			// si el usuario no existe agrega un mensaje de error en el modelo.
 			model.put("error", "Usuario o clave incorrecta");

@@ -21,33 +21,33 @@
 							<c:choose>
 								<c:when test="${not empty motosocupadas}">
 									<div class="table-responsive">
+										<h2>Motos Ocupadas</h2>
 										<table class="table table-hover">
-											<h2>Motos Ocupadas</h2>
 											<thead>
 												<tr>
-													<th>Patente</th>
-													<th>Conductor</th>
-													<th>Direccion</th>
-													<th>Solicitante</th>
-													<th>Telefono</th>
-													<th>Precio</th>
-													<th>Demora Informada</th>
-													<th>Liberar Moto</th>
+													<th><span class="lead">Patente</span></th>
+													<th><span class="lead">Conductor</span></th>
+													<th><span class="lead">Direccion</span></th>
+													<th><span class="lead">Solicitante</span></th>
+													<th><span class="lead">Telefono</span></th>
+													<th><span class="lead">Demora</span></th>
+													<th><span class="lead">Precio</span></th>
+													<th><span class="lead">Liberar Moto</span></th>
 												</tr>
 											</thead>
 											<tbody>
 
 												<c:forEach items="${motosocupadas}" var="motosocupadas">
-													<tr>
-														<th>${motosocupadas.patente}</th>
-														<th>${motosocupadas.conductor}</th>
+													<tr align="left">
+														<th><span class="lead bg-danger">${motosocupadas.patente}</span></th>
+														<th><span class="lead bg-danger">${motosocupadas.conductor}</span></th>
 														<c:forEach items="${motosocupadas.listaPedido}"
 															var="listaPedido">
-															<th>${listaPedido.direccion}</th>
-															<th>${listaPedido.solicitante}</th>
-															<th>${listaPedido.telefono}</th>
-															<th>${listaPedido.precio}</th>
-															<th>${listaPedido.demora}</th>
+															<th><span class="lead bg-info">${listaPedido.direccion}</span></th>
+															<th><span class="lead bg-info">${listaPedido.solicitante}</span></th>
+															<th><span class="lead bg-info">${listaPedido.telefono}</span></th>
+															<th><span class="lead bg-info">${listaPedido.demora}</span></th>
+															<th><span class="lead bg-info">${listaPedido.precio}</span></th>
 														</c:forEach>
 														<td><a
 															href="liberar-moto?patente=${motosocupadas.patente}"
@@ -67,10 +67,10 @@
 										<table class="table table-hover">
 											<thead>
 												<tr>
-													<th>Solicitante</th>
-													<th>Direccion</th>
-													<th>Demora Informada</th>
-													<th>Detalle</th>
+													<th><span class="lead">Solicitante</span></th>
+													<th><span class="lead">Direccion</span></th>
+													<th><span class="lead">Demora Informada</span></th>
+													<th><span class="lead">Detalle</span></th>
 												</tr>
 											</thead>
 											<tbody>
@@ -94,25 +94,36 @@
 												<table class="table table-hover">
 													<thead>
 														<tr>
-															<th><span  class="lead">Patente</span></th>
-															<th><span  class="lead">Conductor</span></th>
-															<th><span  class="lead">Pedidos Entregados</span></th>
+															<th><span class="lead">Patente</span></th>
+															<th><span class="lead">Conductor</span></th>
+															<th><span class="lead">Pedidos Entregados</span></th>
 														</tr>
 													</thead>
 													<tbody>
 														<c:forEach items="${motoslibres}" var="motoslibres">
 															<tr>
-																<th><span class="lead bg-danger" >${motoslibres.patente}</span></th>
+																<th><span class="lead bg-danger">${motoslibres.patente}</span></th>
 																<th><span class="lead bg-danger">${motoslibres.conductor}</span></th>
 																<c:choose>
-																<c:when test="${not empty motoslibres.listaPedido}">
-																<c:forEach items="${motoslibres.listaPedido}"
-																	var="listaPedido">
-																	<th><span class="lead bg-info">${listaPedido.solicitante} /</span><span class="lead bg-success">  ${listaPedido.direccion} /</span><span class="lead bg-warning"> ${listaPedido.telefono}</span></th>
-																</c:forEach>
-																</c:when>
-																<c:otherwise><th><span class="lead bg-info">No tuvo pedidos aún</span></th>
-																</c:otherwise>
+																	<c:when test="${not empty motoslibres.listaPedido}">
+
+																		<th>
+
+																			<button type="button" class="btn btn-simple"
+																				data-toggle="modal"
+																				data-target="#${motoslibres.patente}">
+																				<a data-toggle="tooltip" data-placement="top"
+																					title="PEDIDOS ENTREGADOS"><i
+																					class="material-icons" style="font-size: 20px">motorcycle</i></a>
+																			</button>
+																		</th>
+
+
+																	</c:when>
+																	<c:otherwise>
+																		<th><p class="lead bg-info">No tuvo pedidos
+																				aún</p></th>
+																	</c:otherwise>
 																</c:choose>
 															</tr>
 														</c:forEach>
@@ -130,6 +141,51 @@
 		</div>
 	</div>
 
+	<c:choose>
+		<c:when test="${not empty motoslibres}">
+			<c:forEach items="${motoslibres}" var="motoslibres">
+
+				<div id="${motoslibres.patente}" class="modal fade" role="dialog"
+					style="overflow-y: scroll;">
+					<div class="modal-dialog">
+						<div class="modal-content">
+
+							<form class="form-horizontal" role="form" id="form-crear">
+								<div class="modal-body">
+									<c:choose>
+										<c:when test="${not empty motoslibres.listaPedido}">
+										<h2>Conductor ${motoslibres.conductor}</h2>
+										<hr>
+											<c:forEach items="${motoslibres.listaPedido}"
+												var="listaPedido">
+												<h3>Pedido ${listaPedido.estado}</h3>
+												<span class="lead bg-info">${listaPedido.solicitante}
+													/</span>
+												<span class="lead bg-success">
+													${listaPedido.direccion} /</span>
+												<span class="lead bg-warning">
+													${listaPedido.telefono} /</span>
+												<span class="lead bg-primary">
+													$${listaPedido.precio}</span>
+												<hr>
+											</c:forEach>
+										</c:when>
+									</c:choose>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default"
+										data-dismiss="modal">
+										<span class="glyphicon glyphicon-remove"></span> <span
+											class="hidden-xs">Cerrar</span>
+									</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</c:forEach>
+		</c:when>
+	</c:choose>
 
 	<jsp:include page="/includes/footer.jsp"></jsp:include>
 </body>
