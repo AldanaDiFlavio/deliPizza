@@ -8,17 +8,16 @@ import ar.edu.unlam.tallerweb1.modelo.enclase.Tambor;
 // Libreria de assersiones - que junit no tiene, ya esta incluida en el proyecto base
 import static org.assertj.core.api.Assertions.*;
 
+public class TestTambor extends SpringTest {
 
-public class TestTambor extends SpringTest{
-	
 	@Test
 	public void testAlGirarElTamborDeUnNumeroEntre1y7() {
-		
-		/*Preparacion*/ 
+
+		/* Preparacion */
 		Tambor tamb = new Tambor();
-		/*Ejecucion*/ 
+		/* Ejecucion */
 		tamb.girar();
-		/*Validacion*/ 
-	    assertThat(tamb.getValor()).isBetween(1, 8);		
+		/* Validacion */
+		assertThat(tamb.getValor()).isBetween(1, 8);
 	}
 }

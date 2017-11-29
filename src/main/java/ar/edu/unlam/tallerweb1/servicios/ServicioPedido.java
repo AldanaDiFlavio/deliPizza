@@ -7,9 +7,9 @@ import ar.edu.unlam.tallerweb1.modelo.Pedido;
 import ar.edu.unlam.tallerweb1.modelo.Pizza;
 
 public interface ServicioPedido {
-	
+
 	List<Pedido> traerTodosLosPedidos();
-	
+
 	void guardarPedido(Pedido pedido);
 
 	Pedido generarPedidoParaPersistirConLasPizzasDelPedido(Pedido pedido, List<Pizza> pizzasDelPedidoParaPersistir);
@@ -21,6 +21,11 @@ public interface ServicioPedido {
 	Pedido traerElPedidoEnDeliveryAsignadoAUnaMoto(Moto moto);
 
 	List<Pizza> generarPedidoParaMostrar(List<Pizza> carrito);
-	
+
 	Integer calcularPrecioTotalPorTodasLasPizzasDelPedido(List<Pizza> carrito);
+
+	void marcarUnPedidoComoEntregado(Pedido pedido);
+
+	void siHayPedidosEnEsperaAsignarLaMotoQuelibere(Moto moto, List<Pedido> ListaDePedidosEnEspera);
+
 }

@@ -1,6 +1,5 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -21,18 +20,15 @@ public class ServicioMotoImpl implements ServicioMoto {
 
 	@Inject
 	private MotoDao servicioMotoDao;
-	
-	@Inject
-	private ServicioPedido servicioPedido;
-	
+
 	@Override
 	public void guardarMoto(Moto moto) {
-		 servicioMotoDao.guardarMoto(moto);
+		servicioMotoDao.guardarMoto(moto);
 	}
-	
+
 	@Override
 	public void actualizarMoto(Moto moto) {
-		servicioMotoDao.actualizarMoto(moto);	
+		servicioMotoDao.actualizarMoto(moto);
 	}
 
 	@Override
@@ -52,38 +48,38 @@ public class ServicioMotoImpl implements ServicioMoto {
 
 	@Override
 	public Moto consultarSiHayMotosLibres() {
-			
-		List <Moto> traerTodasLasMotos = traerTodasLasMotos();
+
+		List<Moto> traerTodasLasMotos = traerTodasLasMotos();
 		Collections.sort(traerTodasLasMotos);
-		Moto moto = new Moto();	
-		moto.setEstado("Ocupada"); // Estado - True - Es Ocupada
+		Moto moto = new Moto();
+		moto.setEstado("Ocupada");
 		for (Moto motos : traerTodasLasMotos) {
-			if(motos.getEstado().equals("Libre")){ // Estado - False - Es libre
+			if (motos.getEstado().equals("Libre")) {
 				moto = motos;
-			break;
+				break;
 			}
 		}
-		if(moto.getEstado() == "Ocupada"){
-		return moto; // Sin motos
-	}else
-		return moto; // Con almenos una moto
+		if (moto.getEstado() == "Ocupada") {
+			return moto; // Sin motos
+		} else
+			return moto; // Con almenos una moto
 	}
 
 	@Override
 	public List<Moto> traerListaDeMotosOcupadas() {
-		List <Moto> traerTodasLasMotos = traerTodasLasMotos();
-		List <Moto> moto = new LinkedList<Moto>();	
+		List<Moto> traerTodasLasMotos = traerTodasLasMotos();
+		List<Moto> moto = new LinkedList<Moto>();
 		for (Moto motos : traerTodasLasMotos) {
-			if(motos.getEstado().equals("Ocupada")){ 
-				
-				for (Pedido ped : motos.getlistaPedido()) {	
-			           if(ped.getEstado().equals("EnDelivery")){
-			        	   motos.getlistaPedido().clear();
-			        	   motos.getlistaPedido().add(ped);
-			        	   break;
-			            }			
+			if (motos.getEstado().equals("Ocupada")) {
+
+				for (Pedido ped : motos.getlistaPedido()) {
+					if (ped.getEstado().equals("EnDelivery")) {
+						motos.getlistaPedido().clear();
+						motos.getlistaPedido().add(ped);
+						break;
+					}
 				}
-				
+
 				moto.add(motos);
 			}
 		}
@@ -92,10 +88,10 @@ public class ServicioMotoImpl implements ServicioMoto {
 
 	@Override
 	public List<Moto> traerListaDeMotosLibres() {
-		List <Moto> traerTodasLasMotos = traerTodasLasMotos();
-		List <Moto> moto = new LinkedList<Moto>();	
+		List<Moto> traerTodasLasMotos = traerTodasLasMotos();
+		List<Moto> moto = new LinkedList<Moto>();
 		for (Moto motos : traerTodasLasMotos) {
-			if(motos.getEstado().equals("Libre")){ 
+			if (motos.getEstado().equals("Libre")) {
 				moto.add(motos);
 			}
 		}
@@ -105,11 +101,16 @@ public class ServicioMotoImpl implements ServicioMoto {
 
 	@Override
 	public void liberarMotoDePedido(Moto moto) {
-		moto.setEstado("Libre"); 
+		moto.setEstado("Libre");
 		actualizarMoto(moto);
-//		Pedido pedido = moto.getlistaPedido().get(0);
-//		pedido.setEstado("Entregado");
-//		servicioPedido.actualizarPedido(pedido);
 	}
-		
+
+	@Override
+	public void asignarMotoAPedido(Moto moto, Pedido pedidoParaPersistir) {
+		pedidoParaPersistir.setMoto(moto);
+		pedidoParaPersistir.setEstado("EnDelivery"); // Esta En Delivery
+		moto.setEstado("Ocupada"); // Paso la moto a Ocupada
+		actualizarMoto(moto);
+	}
+
 }

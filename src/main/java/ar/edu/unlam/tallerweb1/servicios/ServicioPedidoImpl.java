@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.dao.PedidoDao;
+import ar.edu.unlam.tallerweb1.servicios.ServicioMoto;
 import ar.edu.unlam.tallerweb1.modelo.Moto;
 import ar.edu.unlam.tallerweb1.modelo.Pedido;
 import ar.edu.unlam.tallerweb1.modelo.Pizza;
@@ -19,7 +20,10 @@ public class ServicioPedidoImpl implements ServicioPedido {
 
 	@Inject
 	private PedidoDao servicioPedidoDao;
-	
+
+	@Inject
+	private ServicioMoto servicioMoto;
+
 	@Override
 	public List<Pedido> traerTodosLosPedidos() {
 		return servicioPedidoDao.traerTodosLosPedidos();
@@ -28,16 +32,17 @@ public class ServicioPedidoImpl implements ServicioPedido {
 	@Override
 	public void guardarPedido(Pedido pedido) {
 		servicioPedidoDao.guardarPedido(pedido);
-		
-	}
-	
-	@Override
-	public void actualizarPedido(Pedido pedido) {
-		servicioPedidoDao.actualizarPedido(pedido);	
+
 	}
 
 	@Override
-	public Pedido generarPedidoParaPersistirConLasPizzasDelPedido(Pedido pedido, List<Pizza> pizzasDelPedidoParaPersistir) {
+	public void actualizarPedido(Pedido pedido) {
+		servicioPedidoDao.actualizarPedido(pedido);
+	}
+
+	@Override
+	public Pedido generarPedidoParaPersistirConLasPizzasDelPedido(Pedido pedido,
+			List<Pizza> pizzasDelPedidoParaPersistir) {
 		Pedido pedidoParaPersistir = new Pedido();
 		pedidoParaPersistir.setSolicitante(pedido.getSolicitante());
 		pedidoParaPersistir.setDireccion(pedido.getDireccion());
@@ -51,11 +56,11 @@ public class ServicioPedidoImpl implements ServicioPedido {
 
 	@Override
 	public List<Pedido> traerListaDePedidosEnEspera() {
-		
-		List <Pedido> traerTodosLosPedidos = traerTodosLosPedidos();
-		List <Pedido> pedido = new LinkedList<Pedido>();	
+
+		List<Pedido> traerTodosLosPedidos = traerTodosLosPedidos();
+		List<Pedido> pedido = new LinkedList<Pedido>();
 		for (Pedido pedidos : traerTodosLosPedidos) {
-			if(pedidos.getEstado().equals("EnEspera")){ 
+			if (pedidos.getEstado().equals("EnEspera")) {
 				pedido.add(pedidos);
 			}
 		}
@@ -75,7 +80,7 @@ public class ServicioPedidoImpl implements ServicioPedido {
 		}
 		return pedidoAMostrar;
 	}
-	
+
 	@Override
 	public Integer calcularPrecioTotalPorTodasLasPizzasDelPedido(List<Pizza> carrito) {
 		Integer preciototalportodaslaspizzas = 0;
@@ -84,7 +89,23 @@ public class ServicioPedidoImpl implements ServicioPedido {
 		}
 		return preciototalportodaslaspizzas;
 	}
-	
+
+	@Override
+	public void marcarUnPedidoComoEntregado(Pedido pedido) {
+		pedido.setEstado("Entregado");
+	}
+
+	@Override
+	public void siHayPedidosEnEsperaAsignarLaMotoQuelibere(Moto moto, List<Pedido> ListaDePedidosEnEspera) {
+		Pedido pedido = ListaDePedidosEnEspera.get(0);
+		pedido.setMoto(moto);
+		pedido.setEstado("EnDelivery");
+		actualizarPedido(pedido);
+		moto.setEstado("Ocupada");
+		List<Pedido> listaPedidos = moto.getlistaPedido();
+		listaPedidos.add(pedido);
+		moto.setlistaPedido(listaPedidos);
+		servicioMoto.actualizarMoto(moto);
+	}
+
 }
-
-

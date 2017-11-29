@@ -68,18 +68,20 @@
 											<thead>
 												<tr>
 													<th><span class="lead">Solicitante</span></th>
+													<th><span class="lead">Dirrecion</span></th>
+													<th><span class="lead">Telefono</span></th>
+													<th><span class="lead">Demora</span></th>
 													<th><span class="lead">Direccion</span></th>
-													<th><span class="lead">Demora Informada</span></th>
-													<th><span class="lead">Detalle</span></th>
 												</tr>
 											</thead>
 											<tbody>
 												<c:forEach items="${pedidosenespera}" var="i">
 													<tr>
-														<th>${i.solicitante}</th>
-														<th>${i.direccion}</th>
-														<th>${i.id}</th>
-														<th>${i.id}</th>
+														<th><span class="lead bg-danger">${i.solicitante}</span></th>
+														<th><span class="lead bg-danger">${i.direccion}</span></th>
+														<th><span class="lead bg-danger">${i.telefono}</span></th>
+														<th><span class="lead bg-danger">${i.demora}</span></th>
+														<th><span class="lead bg-danger">${i.precio}</span></th>
 													</tr>
 												</c:forEach>
 											</tbody>
@@ -154,8 +156,8 @@
 								<div class="modal-body">
 									<c:choose>
 										<c:when test="${not empty motoslibres.listaPedido}">
-										<h2>Conductor ${motoslibres.conductor}</h2>
-										<hr>
+											<h2>Conductor ${motoslibres.conductor}</h2>
+											<hr>
 											<c:forEach items="${motoslibres.listaPedido}"
 												var="listaPedido">
 												<h3>Pedido ${listaPedido.estado}</h3>
@@ -165,8 +167,7 @@
 													${listaPedido.direccion} /</span>
 												<span class="lead bg-warning">
 													${listaPedido.telefono} /</span>
-												<span class="lead bg-primary">
-													$${listaPedido.precio}</span>
+												<span class="lead bg-primary"> $${listaPedido.precio}</span>
 												<hr>
 											</c:forEach>
 										</c:when>

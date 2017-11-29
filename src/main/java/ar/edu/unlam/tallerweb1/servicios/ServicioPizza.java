@@ -5,14 +5,12 @@ import java.util.List;
 import ar.edu.unlam.tallerweb1.modelo.Pizza;
 
 public interface ServicioPizza {
-	
+
 	List<Pizza> traerTodasLasPizzas();
-	
+
 	void guardarPizza(Pizza pizza);
 
 	Pizza traerUnaPizzaPorSuId(Long id);
-	
-	List<Integer> traerListaDeNumeros();
 
 	List<Pizza> generarListaDePizzasParaPersistirAPartirDeLaListaDePizzasDelCarrito(List<Pizza> carrito);
 
@@ -29,5 +27,5 @@ public interface ServicioPizza {
 	Pizza calcularTotalDeLaPizza(Pizza pizza, Pizza laPizzaConLaCantidad);
 
 	List<Pizza> quitaDelCarrito(List<Pizza> carrito, Pizza pizza);
-	
+
 }

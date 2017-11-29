@@ -18,7 +18,7 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 
 	@Override
 	public void guardarUsuario(Usuario usuario) {
-		 servicioUsuarioDao.guardarUsuario(usuario);
+		servicioUsuarioDao.guardarUsuario(usuario);
 	}
-	
+
 }

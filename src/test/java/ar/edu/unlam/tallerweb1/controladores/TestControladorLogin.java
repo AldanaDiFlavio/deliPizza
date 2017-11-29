@@ -63,9 +63,10 @@ public class TestControladorLogin extends SpringTest {
 		// Paso la entrada reviso la salida
 		// Meterme en el codigo y saber sin usar el valor de retorno
 		// Espias FAKE Objet
-	// Tragamonedas prodria decir verify(t1,times(1).girar();) // Si no ocurre
-	// da rojo es un Assert de algo interno
-	// Tragamonedas prodria decir verify(t1,never().girar();)
+		// Tragamonedas prodria decir verify(t1,times(1).girar();) // Si no
+		// ocurre
+		// da rojo es un Assert de algo interno
+		// Tragamonedas prodria decir verify(t1,never().girar();)
 
 	// No se puede pedir verify a algo que no es un MOCK
 	// Test de caja trasnparente porque se el como
@@ -109,14 +110,7 @@ public class TestControladorLogin extends SpringTest {
 
 		assertThat(mav.getView()).isEqualTo("login");
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
 	/*
 	 * @Test public void validarLoginUsuarioBien() { Usuario usuarioFake =
 	 * mock(Usuario.class); servicioLoginFake = mock(ServicioLogin.class);

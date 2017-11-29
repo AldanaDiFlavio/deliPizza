@@ -16,46 +16,40 @@ import javax.inject.Inject;
 public class MotoDaoImpl implements MotoDao {
 
 	@Inject
-    private SessionFactory sessionFactory;
-	
+	private SessionFactory sessionFactory;
+
 	@Override
 	public void guardarMoto(Moto moto) {
 		final Session session = sessionFactory.getCurrentSession();
-		session.save(moto);		
+		session.save(moto);
 	}
-	
+
 	@Override
 	public void actualizarMoto(Moto moto) {
 		final Session session = sessionFactory.getCurrentSession();
-		session.update(moto);		
+		session.update(moto);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Moto> traerTodasLasMotos() {
-		
-		return( sessionFactory.getCurrentSession()
-				.createCriteria(Moto.class)
-				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
-				.list());	
+
+		return (sessionFactory.getCurrentSession().createCriteria(Moto.class)
+				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list());
 	}
 
 	@Override
 	public Moto traerUnaMotoPorSuPatente(String patente) {
-		
-		 return (Moto) ( sessionFactory.getCurrentSession()
-		 .createCriteria(Moto.class)
-		 .add(Restrictions.eq("patente", patente))
-		 .uniqueResult());
-		 
+
+		return (Moto) (sessionFactory.getCurrentSession().createCriteria(Moto.class)
+				.add(Restrictions.eq("patente", patente)).uniqueResult());
+
 	}
 
 	@Override
 	public Moto traerUnaMotoPorSuId(Long id) {
-		 return (Moto) ( sessionFactory.getCurrentSession()
-				 .createCriteria(Moto.class)
-				 .add(Restrictions.eq("id", id))
-				 .uniqueResult());
+		return (Moto) (sessionFactory.getCurrentSession().createCriteria(Moto.class).add(Restrictions.eq("id", id))
+				.uniqueResult());
 	}
 
 }

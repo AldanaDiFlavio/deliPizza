@@ -16,36 +16,31 @@ import javax.inject.Inject;
 public class PedidoDaoImpl implements PedidoDao {
 
 	@Inject
-    private SessionFactory sessionFactory;
+	private SessionFactory sessionFactory;
 
 	@Override
 	public void guardarPedido(Pedido pedido) {
 		final Session session = sessionFactory.getCurrentSession();
-		session.save(pedido);		
+		session.save(pedido);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Pedido> traerTodosLosPedidos(){
-		
-		return(sessionFactory.getCurrentSession()
-				.createCriteria(Pedido.class)
-				.list());	
+	public List<Pedido> traerTodosLosPedidos() {
+
+		return (sessionFactory.getCurrentSession().createCriteria(Pedido.class).list());
 	}
 
 	@Override
 	public void actualizarPedido(Pedido pedido) {
 		final Session session = sessionFactory.getCurrentSession();
-		session.update(pedido);			
+		session.update(pedido);
 	}
 
 	@Override
 	public Pedido traerElPedidoEnDeliveryAsignadoAUnaMoto(Moto moto) {
-		return (Pedido) ( sessionFactory.getCurrentSession()
-				 .createCriteria(Pedido.class)
-				 .add(Restrictions.eq("estado", "EnDelivery"))
-				 .add(Restrictions.eq("moto", moto))
-				 .uniqueResult());
+		return (Pedido) (sessionFactory.getCurrentSession().createCriteria(Pedido.class)
+				.add(Restrictions.eq("estado", "EnDelivery")).add(Restrictions.eq("moto", moto)).uniqueResult());
 	}
-	
+
 }

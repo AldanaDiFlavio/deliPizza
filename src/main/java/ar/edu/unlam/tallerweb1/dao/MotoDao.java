@@ -5,9 +5,9 @@ import java.util.List;
 import ar.edu.unlam.tallerweb1.modelo.Moto;
 
 public interface MotoDao {
-	
+
 	void guardarMoto(Moto moto);
-	
+
 	List<Moto> traerTodasLasMotos();
 
 	Moto traerUnaMotoPorSuPatente(String patente);
@@ -15,5 +15,5 @@ public interface MotoDao {
 	Moto traerUnaMotoPorSuId(Long id);
 
 	void actualizarMoto(Moto moto);
-	
+
 }

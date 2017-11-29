@@ -15,39 +15,33 @@ import javax.inject.Inject;
 public class PizzaDaoImpl implements PizzaDao {
 
 	@Inject
-    private SessionFactory sessionFactory;
+	private SessionFactory sessionFactory;
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Pizza> traerTodasLasPizzas() {
-		
-		return(sessionFactory.getCurrentSession()
-				.createCriteria(Pizza.class)
-				.list());	
+
+		return (sessionFactory.getCurrentSession().createCriteria(Pizza.class).list());
 	}
 
 	@Override
 	public void guardarPizza(Pizza pizza) {
 		final Session session = sessionFactory.getCurrentSession();
-		session.save(pizza);		
+		session.save(pizza);
 	}
 
 	@Override
 	public Pizza traerUnaPizzaPorSuNombre(String string) {
-		
-		 return (Pizza) ( sessionFactory.getCurrentSession()
-		 .createCriteria(Pizza.class)
-		 .add(Restrictions.eq("nombre", string))
-		 .uniqueResult());
-		 
+
+		return (Pizza) (sessionFactory.getCurrentSession().createCriteria(Pizza.class)
+				.add(Restrictions.eq("nombre", string)).uniqueResult());
+
 	}
 
 	@Override
 	public Pizza traerUnaPizzaPorSuId(Long id) {
-		 return (Pizza) ( sessionFactory.getCurrentSession()
-				 .createCriteria(Pizza.class)
-				 .add(Restrictions.eq("id", id))
-				 .uniqueResult());
+		return (Pizza) (sessionFactory.getCurrentSession().createCriteria(Pizza.class).add(Restrictions.eq("id", id))
+				.uniqueResult());
 	}
 
 }

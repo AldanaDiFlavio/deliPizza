@@ -3,11 +3,12 @@ package ar.edu.unlam.tallerweb1.servicios;
 import java.util.List;
 
 import ar.edu.unlam.tallerweb1.modelo.Moto;
+import ar.edu.unlam.tallerweb1.modelo.Pedido;
 
 public interface ServicioMoto {
-	
+
 	void guardarMoto(Moto moto);
-	
+
 	List<Moto> traerTodasLasMotos();
 
 	Moto traerUnaMotoPorSuPatente(String patente);
@@ -17,10 +18,12 @@ public interface ServicioMoto {
 	Moto consultarSiHayMotosLibres();
 
 	void actualizarMoto(Moto moto);
-	
+
 	List<Moto> traerListaDeMotosOcupadas();
 
 	List<Moto> traerListaDeMotosLibres();
 
 	void liberarMotoDePedido(Moto moto);
+
+	void asignarMotoAPedido(Moto moto, Pedido pedidoParaPersistir);
 }

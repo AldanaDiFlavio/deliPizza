@@ -1,6 +1,5 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -36,16 +35,6 @@ public class ServicioPizzaImpl implements ServicioPizza {
 	}
 
 	@Override
-	public List<Integer> traerListaDeNumeros() {
-		ArrayList<Integer> numeros = new ArrayList<Integer>();
-		for (int i = 1; i < 100; i++) {
-			numeros.add(i);
-		}
-		return numeros;
-
-	}
-
-	@Override
 	public List<Pizza> generarListaDePizzasParaPersistirAPartirDeLaListaDePizzasDelCarrito(List<Pizza> carrito) {
 		Pizza pizza = new Pizza();
 		List<Pizza> pedidoreal = new LinkedList<Pizza>(); // Persistir
@@ -59,14 +48,13 @@ public class ServicioPizzaImpl implements ServicioPizza {
 	}
 
 	@Override
-	public List<Pizza> generarListaDePizzasParaMostrarAlClienteAPartirDeLaListaDePizzasDelCarrito(
-			List<Pizza> carrito) {
+	public List<Pizza> generarListaDePizzasParaMostrarAlClienteAPartirDeLaListaDePizzasDelCarrito(List<Pizza> carrito) {
 
-		List<Pizza> pedidorealmostrar = new LinkedList<Pizza>();
+		List<Pizza> pedidoAMostrar = new LinkedList<Pizza>();
 		for (Pizza p : carrito) {
-			pedidorealmostrar.add(p);
+			pedidoAMostrar.add(p);
 		}
-		return pedidorealmostrar;
+		return pedidoAMostrar;
 	}
 
 	@Override

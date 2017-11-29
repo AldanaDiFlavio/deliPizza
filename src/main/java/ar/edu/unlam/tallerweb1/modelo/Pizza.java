@@ -13,22 +13,23 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 @Entity
-public class Pizza {	
+public class Pizza {
 	private Long id;
-	private String nombre;	
+	private String nombre;
 	private String imagen;
 	private Integer precio;
-	private Integer tcoccion;	
+	private Integer tcoccion;
 	private Integer cantidad;
 	private Integer preciototal;
 	private String tamanio;
 	private List<Ingrediente> listaIngrediente = new LinkedList<Ingrediente>();
-	
+
 	public Pizza() {
 		super();
 	}
-		
-	public Pizza(Long id, String nombre, String imagen, Integer precio, Integer tcoccion, String tamanio, List<Ingrediente> listaIngrediente) {
+
+	public Pizza(Long id, String nombre, String imagen, Integer precio, Integer tcoccion, String tamanio,
+			List<Ingrediente> listaIngrediente) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -45,12 +46,14 @@ public class Pizza {
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-		
+
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "pizza_ingrediente", joinColumns = { @JoinColumn(name = "id_Pizza") }, inverseJoinColumns = { @JoinColumn(name = "id_Ingrediente") })
+	@JoinTable(name = "pizza_ingrediente", joinColumns = { @JoinColumn(name = "id_Pizza") }, inverseJoinColumns = {
+			@JoinColumn(name = "id_Ingrediente") })
 	public List<Ingrediente> getListaIngrediente() {
 		return listaIngrediente;
 	}
@@ -58,23 +61,27 @@ public class Pizza {
 	public void setListaIngrediente(List<Ingrediente> listaIngrediente) {
 		this.listaIngrediente = listaIngrediente;
 	}
-	
+
 	public String getNombre() {
 		return nombre;
 	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
+
 	public String getImagen() {
 		return imagen;
 	}
+
 	public void setImagen(String imagen) {
 		this.imagen = imagen;
 	}
+
 	public Integer getPrecio() {
 		return precio;
 	}
+
 	public void setPrecio(Integer precio) {
 		this.precio = precio;
 	}
@@ -82,10 +89,11 @@ public class Pizza {
 	public Integer getTcoccion() {
 		return tcoccion;
 	}
+
 	public void setTcoccion(Integer tcoccion) {
 		this.tcoccion = tcoccion;
 	}
-	
+
 	public Integer getCantidad() {
 		return cantidad;
 	}
@@ -109,5 +117,5 @@ public class Pizza {
 	public void setTamanio(String tamanio) {
 		this.tamanio = tamanio;
 	}
-		
+
 }

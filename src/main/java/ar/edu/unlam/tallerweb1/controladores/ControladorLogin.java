@@ -1,7 +1,5 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
-import java.util.List;
-
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,22 +10,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import ar.edu.unlam.tallerweb1.modelo.Pizza;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
-import ar.edu.unlam.tallerweb1.servicios.ServicioPizza;
 
 @Controller
 public class ControladorLogin {
 
-	@Inject
-	private ServicioPizza servicioPizza;
-	// La anotacion @Inject indica a Spring que en este atributo se debe setear (inyeccion de dependencias)
-	// un objeto de una clase que implemente la interface ServicioLogin, dicha clase debe estar anotada como
-	// @Service o @Repository y debe estar en un paquete de los indicados en applicationContext.xml
+	// La anotacion @Inject indica a Spring que en este atributo se debe setear
+	// (inyeccion de dependencias)
+	// un objeto de una clase que implemente la interface ServicioLogin, dicha
+	// clase debe estar anotada como
+	// @Service o @Repository y debe estar en un paquete de los indicados en
+	// applicationContext.xml
 	@Inject
 	private ServicioLogin servicioLogin;
-	
+
 	public ServicioLogin getServicioLogin() {
 		return servicioLogin;
 	}
@@ -35,37 +32,47 @@ public class ControladorLogin {
 	public void setServicioLogin(ServicioLogin servicioLogin) {
 		this.servicioLogin = servicioLogin;
 	}
-		
-	// Este metodo escucha la URL localhost:8080/NOMBRE_APP/login si la misma es invocada por metodo http GET	
+
+	// Este metodo escucha la URL localhost:8080/NOMBRE_APP/login si la misma es
+	// invocada por metodo http GET
 	@RequestMapping("/login")
 	public ModelAndView irALogueo() {
 		ModelMap modelo = new ModelMap();
-		// Se agrega al modelo un objeto del tipo Usuario con key 'usuario' para que el mismo sea asociado
+		// Se agrega al modelo un objeto del tipo Usuario con key 'usuario' para
+		// que el mismo sea asociado
 		// al model attribute del form que esta definido en la vista 'login'
 		Usuario usuario = new Usuario();
 		modelo.put("usuario", usuario);
-		// Se va a la vista login (el nombre completo de la lista se resuelve utilizando el view resolver definido en el archivo spring-servlet.xml)
-		// y se envian los datos a la misma  dentro del modelo
+		// Se va a la vista login (el nombre completo de la lista se resuelve
+		// utilizando el view resolver definido en el archivo
+		// spring-servlet.xml)
+		// y se envian los datos a la misma dentro del modelo
 		return new ModelAndView("login", modelo);
-		
+
 	}
 
-	// Este metodo escucha la URL validar-login siempre y cuando se invoque con metodo http POST
-	// El método recibe un objeto Usuario el que tiene los datos ingresados en el form correspondiente y se corresponde con el modelAttribute definido en el
+	// Este metodo escucha la URL validar-login siempre y cuando se invoque con
+	// metodo http POST
+	// El método recibe un objeto Usuario el que tiene los datos ingresados en
+	// el form correspondiente y se corresponde con el modelAttribute definido
+	// en el
 	// tag form:form
 	@RequestMapping(path = "/validar-login", method = RequestMethod.POST)
 	public ModelAndView validarLogin(@ModelAttribute("usuario") Usuario usuario, HttpServletRequest request) {
 		ModelMap model = new ModelMap();
 
-		// invoca el metodo consultarUsuario del servicio y hace un redirect a la URL /home, esto es, en lugar de enviar a una vista
-		// hace una llamada a otro action a través de la URL correspondiente a ésta
+		// invoca el metodo consultarUsuario del servicio y hace un redirect a
+		// la URL /home, esto es, en lugar de enviar a una vista
+		// hace una llamada a otro action a través de la URL correspondiente a
+		// ésta
 		Usuario usuarioBuscado = servicioLogin.consultarUsuario(usuario);
 		if (usuarioBuscado != null) {
 			request.getSession().setAttribute("usuario", usuarioBuscado);
 			// request el http de request
-			// Modela un objeto de 
+			// Modela un objeto de
 			// Quien crea el request
-			// HTTPREQUEST que es un objeto complejo que viene de la peticion http
+			// HTTPREQUEST que es un objeto complejo que viene de la peticion
+			// http
 			// esta asociado una session
 			// recibe lo que ingresa una persona en el formulario
 			// Toma rol de usuario mete en la session y regirige al login
@@ -73,9 +80,10 @@ public class ControladorLogin {
 			// Probar el controlador
 			// Usuario invalido?
 			// Usuario existe?
-			// Fijarme si va a la pantalla login y que en modelo variable error con ese valor
+			// Fijarme si va a la pantalla login y que en modelo variable error
+			// con ese valor
 			model.put("usuario", usuarioBuscado);
-			
+
 			return new ModelAndView("redirect:/administrar");
 		} else {
 			// si el usuario no existe agrega un mensaje de error en el modelo.
@@ -83,9 +91,9 @@ public class ControladorLogin {
 		}
 		return new ModelAndView("login", model);
 	}
-	
+
 	@RequestMapping("/cerrarSesion")
-	protected ModelAndView cerrarSesion(HttpServletRequest request){
+	protected ModelAndView cerrarSesion(HttpServletRequest request) {
 		request.getSession().removeAttribute("usuario");
 		return new ModelAndView("redirect:/home");
 	}

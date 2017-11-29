@@ -22,7 +22,7 @@ public class ServicioLoginImpl implements ServicioLogin {
 	private UsuarioDao servicioLoginDao;
 
 	@Override
-	public Usuario consultarUsuario (Usuario usuario) {
+	public Usuario consultarUsuario(Usuario usuario) {
 		return servicioLoginDao.consultarUsuario(usuario);
 	}
 

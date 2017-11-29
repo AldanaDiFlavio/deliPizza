@@ -6,7 +6,7 @@ import ar.edu.unlam.tallerweb1.modelo.Moto;
 import ar.edu.unlam.tallerweb1.modelo.Pedido;
 
 public interface PedidoDao {
-	
+
 	List<Pedido> traerTodosLosPedidos();
 
 	void guardarPedido(Pedido pedido);

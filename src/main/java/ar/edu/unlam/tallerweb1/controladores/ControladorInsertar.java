@@ -256,7 +256,7 @@ public class ControladorInsertar {
 		pizzachoclo.setPrecio(200);
 		pizzachoclo.setTcoccion(25);
 		pizzachoclo.setTamanio("Normal");
-		
+
 		Ingrediente ich = servicioIngrediente.buscarIngrediente("choclo");
 		List<Ingrediente> ingredientechoclo = new LinkedList<Ingrediente>();
 		ingredientechoclo.add(ich);
@@ -399,7 +399,7 @@ public class ControladorInsertar {
 		// Pedido moto 1
 
 		List<Pizza> pizzaspedidomotouno = new LinkedList<Pizza>();
-		pizzaspedidomotouno.add(calabresa); 
+		pizzaspedidomotouno.add(calabresa);
 		pizzaspedidomotouno.add(napolitana);
 		Pedido pedidomotouno = new Pedido();
 		pedidomotouno.setSolicitante("Jorge");
@@ -416,7 +416,7 @@ public class ControladorInsertar {
 		lpedidomotouno.add(pedidomotouno);
 		motouno.setlistaPedido(lpedidomotouno);
 		servicioMoto.actualizarMoto(motouno);
-		
+
 		// Pedido moto 2
 
 		List<Pizza> pizzaspedidomotodos = new LinkedList<Pizza>();

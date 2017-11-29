@@ -69,9 +69,9 @@
 											class="form-control" placeholder="0111562343596" value=""
 											onKeyPress="return validar(event)" maxlength="20" />
 									</div>
-									<span class="hidden">
-										<form:input id="f1t1" name="f1t1" type="text" path="demora"
-											class="form-control" placeholder="Demora" value=""/>
+									<span class="hidden"> <form:input id="f1t1" name="f1t1"
+											type="text" path="demora" class="form-control"
+											placeholder="Demora" value="" />
 									</span>
 							</div>
 						</div>
@@ -290,9 +290,9 @@
 														document
 																.getElementById('duration').innerHTML = horas
 																+ ' horas';
-														
+
 														document.confirform.f1t1.value = horas;
-														
+
 														document
 																.getElementById('direerror').style.padding = '0px 0px';
 														document
@@ -304,9 +304,9 @@
 														document
 																.getElementById('duration').innerHTML = minutos
 																+ ' minutos';
-														
+
 														document.confirform.f1t1.value = minutos;
-														
+
 														document
 																.getElementById('direerror').style.padding = '0px 0px';
 														document
@@ -341,7 +341,7 @@
 
 	$("#telefono").blur(
 			function() {
-					     
+
 				var telefono = $("#telefono").val();
 
 				$(".error").remove();
@@ -357,8 +357,6 @@
 			});
 
 	function validar(e) {
-		
-		   
 
 		tecla = (document.all) ? e.keyCode : e.which;
 		if (tecla == 8)
