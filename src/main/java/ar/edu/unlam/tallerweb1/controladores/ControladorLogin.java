@@ -40,10 +40,6 @@ public class ControladorLogin {
 	@RequestMapping("/login")
 	public ModelAndView irALogueo() {
 		ModelMap modelo = new ModelMap();
-		
-		List<Pizza> lPizzas = servicioPizza.traerTodasLasPizzas();
-		modelo.put("pizzas", lPizzas);
-
 		// Se agrega al modelo un objeto del tipo Usuario con key 'usuario' para que el mismo sea asociado
 		// al model attribute del form que esta definido en la vista 'login'
 		Usuario usuario = new Usuario();

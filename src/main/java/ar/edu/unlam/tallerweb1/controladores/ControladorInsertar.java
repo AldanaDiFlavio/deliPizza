@@ -54,9 +54,6 @@ public class ControladorInsertar {
 	@RequestMapping("/insertar-pizzas")
 	public ModelAndView insertarPizzas() {
 
-		Boolean grande = true;
-		Boolean chica = false;
-
 		Ingrediente muzzarella = new Ingrediente();
 		muzzarella.setNombre("Muzzarella");
 		muzzarella.setPrecio((float) 10);
@@ -137,8 +134,7 @@ public class ControladorInsertar {
 		pizzamuzzarella.setImagen("muzzarella.jpg");
 		pizzamuzzarella.setPrecio(150);
 		pizzamuzzarella.setTcoccion(20);
-		pizzamuzzarella.setTamanio(grande);
-		pizzamuzzarella.setAclaracion(null);
+		pizzamuzzarella.setTamanio("Normal");
 
 		Ingrediente im = servicioIngrediente.buscarIngrediente("muzzarella");
 		List<Ingrediente> ingredientemuzzarella = new LinkedList<Ingrediente>();
@@ -152,8 +148,7 @@ public class ControladorInsertar {
 		pizzacalabresa.setImagen("calabresa.jpg");
 		pizzacalabresa.setPrecio(150);
 		pizzacalabresa.setTcoccion(20);
-		pizzacalabresa.setTamanio(grande);
-		pizzacalabresa.setAclaracion(null);
+		pizzacalabresa.setTamanio("Normal");
 
 		Ingrediente ic = servicioIngrediente.buscarIngrediente("longaniza");
 		List<Ingrediente> ingredientecalabresa = new LinkedList<Ingrediente>();
@@ -167,8 +162,7 @@ public class ControladorInsertar {
 		pizzacalabresa2.setImagen("calabresae.jpg");
 		pizzacalabresa2.setPrecio(200);
 		pizzacalabresa2.setTcoccion(25);
-		pizzacalabresa2.setTamanio(grande);
-		pizzacalabresa2.setAclaracion(null);
+		pizzacalabresa2.setTamanio("Normal");
 
 		Ingrediente ic21 = servicioIngrediente.buscarIngrediente("longaniza");
 		Ingrediente ic22 = servicioIngrediente.buscarIngrediente("tomate");
@@ -186,8 +180,7 @@ public class ControladorInsertar {
 		pizzajamonymorron.setImagen("jamonymorron.jpg");
 		pizzajamonymorron.setPrecio(150);
 		pizzajamonymorron.setTcoccion(20);
-		pizzajamonymorron.setTamanio(chica);
-		pizzajamonymorron.setAclaracion(null);
+		pizzajamonymorron.setTamanio("Normal");
 
 		Ingrediente ijm1 = servicioIngrediente.buscarIngrediente("jamon");
 		Ingrediente ijm2 = servicioIngrediente.buscarIngrediente("morron");
@@ -204,8 +197,7 @@ public class ControladorInsertar {
 		pizzafugazzetta.setImagen("fugazzetta.jpg");
 		pizzafugazzetta.setPrecio(200);
 		pizzafugazzetta.setTcoccion(25);
-		pizzafugazzetta.setTamanio(grande);
-		pizzafugazzetta.setAclaracion(null);
+		pizzafugazzetta.setTamanio("Normal");
 
 		Ingrediente ifu = servicioIngrediente.buscarIngrediente("cebolla");
 		List<Ingrediente> ingredientefugazzetta = new LinkedList<Ingrediente>();
@@ -219,8 +211,7 @@ public class ControladorInsertar {
 		pizzanapolitana.setImagen("napolitana.jpg");
 		pizzanapolitana.setPrecio(200);
 		pizzanapolitana.setTcoccion(25);
-		pizzanapolitana.setTamanio(grande);
-		pizzanapolitana.setAclaracion(null);
+		pizzanapolitana.setTamanio("Normal");
 
 		Ingrediente in = servicioIngrediente.buscarIngrediente("tomate");
 		List<Ingrediente> ingredientenapolitana = new LinkedList<Ingrediente>();
@@ -234,8 +225,7 @@ public class ControladorInsertar {
 		pizzacapresse.setImagen("capresse.jpg");
 		pizzacapresse.setPrecio(250);
 		pizzacapresse.setTcoccion(25);
-		pizzacapresse.setTamanio(grande);
-		pizzacapresse.setAclaracion(null);
+		pizzacapresse.setTamanio("Normal");
 
 		Ingrediente ica1 = servicioIngrediente.buscarIngrediente("tomate");
 		Ingrediente ica2 = servicioIngrediente.buscarIngrediente("albahaca");
@@ -251,8 +241,7 @@ public class ControladorInsertar {
 		pizzaroquefort.setImagen("roquefort.jpg");
 		pizzaroquefort.setPrecio(200);
 		pizzaroquefort.setTcoccion(25);
-		pizzaroquefort.setTamanio(grande);
-		pizzaroquefort.setAclaracion(null);
+		pizzaroquefort.setTamanio("Normal");
 
 		Ingrediente ir = servicioIngrediente.buscarIngrediente("roquefort");
 		List<Ingrediente> ingredienteroquefort = new LinkedList<Ingrediente>();
@@ -266,9 +255,8 @@ public class ControladorInsertar {
 		pizzachoclo.setImagen("choclo.jpg");
 		pizzachoclo.setPrecio(200);
 		pizzachoclo.setTcoccion(25);
-		pizzachoclo.setTamanio(grande);
-		pizzachoclo.setAclaracion(null);
-
+		pizzachoclo.setTamanio("Normal");
+		
 		Ingrediente ich = servicioIngrediente.buscarIngrediente("choclo");
 		List<Ingrediente> ingredientechoclo = new LinkedList<Ingrediente>();
 		ingredientechoclo.add(ich);
@@ -281,8 +269,7 @@ public class ControladorInsertar {
 		pizzapalmito.setImagen("palmito.jpg");
 		pizzapalmito.setPrecio(250);
 		pizzapalmito.setTcoccion(20);
-		pizzapalmito.setTamanio(grande);
-		pizzapalmito.setAclaracion(null);
+		pizzapalmito.setTamanio("Normal");
 
 		Ingrediente ip = servicioIngrediente.buscarIngrediente("palmito");
 		List<Ingrediente> ingredientepalmito = new LinkedList<Ingrediente>();
@@ -296,8 +283,7 @@ public class ControladorInsertar {
 		pizzaanana.setImagen("anana.jpg");
 		pizzaanana.setPrecio(250);
 		pizzaanana.setTcoccion(20);
-		pizzaanana.setTamanio(grande);
-		pizzaanana.setAclaracion(null);
+		pizzaanana.setTamanio("Normal");
 
 		Ingrediente ia = servicioIngrediente.buscarIngrediente("anana");
 		List<Ingrediente> ingredienteanana = new LinkedList<Ingrediente>();
@@ -311,8 +297,7 @@ public class ControladorInsertar {
 		pizzaprovolone.setImagen("provolone.jpg");
 		pizzaprovolone.setPrecio(230);
 		pizzaprovolone.setTcoccion(20);
-		pizzaprovolone.setTamanio(grande);
-		pizzaprovolone.setAclaracion(null);
+		pizzaprovolone.setTamanio("Normal");
 
 		Ingrediente ipr = servicioIngrediente.buscarIngrediente("provolone");
 		List<Ingrediente> ingredienteprovolone = new LinkedList<Ingrediente>();
@@ -326,8 +311,7 @@ public class ControladorInsertar {
 		pizzarucula.setImagen("rucula.jpg");
 		pizzarucula.setPrecio(230);
 		pizzarucula.setTcoccion(20);
-		pizzarucula.setTamanio(grande);
-		pizzarucula.setAclaracion(null);
+		pizzarucula.setTamanio("Normal");
 
 		Ingrediente iru = servicioIngrediente.buscarIngrediente("rucula");
 		List<Ingrediente> ingredienterucula = new LinkedList<Ingrediente>();
@@ -336,21 +320,6 @@ public class ControladorInsertar {
 		pizzarucula.setListaIngrediente(ingredienterucula);
 		servicioPizza.guardarPizza(pizzarucula);
 
-		// Pizza pizzaespecial = new Pizza();
-		// pizzaespecial.setNombre("Especial");
-		// pizzaespecial.setImagen("pizzaespecial.jpg");
-		// pizzaespecial.setPrecio(300);
-		// pizzaespecial.setTcoccion(20);
-		// pizzaespecial.setTamanio(grande);
-		// pizzaespecial.setAclaracion(null);
-		//
-		//
-		// List<Ingrediente> todosLosIngredientes =
-		// servicioIngrediente.todosLosIngredientes();
-		//
-		// pizzaespecial.setListaIngrediente(todosLosIngredientes);
-		// servicioPizza.guardarPizza(pizzaespecial);
-		//
 		return new ModelAndView("redirect:/insertar-motos");
 	}
 

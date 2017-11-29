@@ -1,7 +1,6 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
 import java.util.List;
-import java.util.Map;
 
 import ar.edu.unlam.tallerweb1.modelo.Pizza;
 
@@ -11,18 +10,24 @@ public interface ServicioPizza {
 	
 	void guardarPizza(Pizza pizza);
 
-	Pizza traerUnaPizzaPorSuNombre(String string);
-
 	Pizza traerUnaPizzaPorSuId(Long id);
 	
 	List<Integer> traerListaDeNumeros();
 
-	List<Pizza> generarListaDePizzasDelCarrito(Map<Pizza, Integer> carrito);
+	List<Pizza> generarListaDePizzasParaPersistirAPartirDeLaListaDePizzasDelCarrito(List<Pizza> carrito);
 
-	List<Pizza> generarListaDePizzasParaPersistirAPartirDeLaListaDePizzasDelCarrito(List<Pizza> listClave);
+	List<Pizza> generarListaDePizzasParaMostrarAlClienteAPartirDeLaListaDePizzasDelCarrito(List<Pizza> carrito);
 
-	List<Pizza> generarListaDePizzasParaMostrarAlClienteAPartirDeLaListaDePizzasDelCarrito(List<Pizza> listClave);
+	Integer calcularPrecioDelPedidoApartirDeLaListaDePizzasDelCarrito(List<Pizza> carrito);
 
-	Integer calcularPrecioDelPedidoApartirDeLaListaDePizzasDelCarrito(List<Pizza> listClave);
+	Integer calcularElprecioTotalPorTodasLasPizzasPedidas(List<Pizza> carrito);
+
+	List<Pizza> aniadeAlCarritoOModifica(List<Pizza> carrito, Pizza pizza);
+
+	Pizza calcularCantidadDePizzas(Pizza lapizza);
+
+	Pizza calcularTotalDeLaPizza(Pizza pizza, Pizza laPizzaConLaCantidad);
+
+	List<Pizza> quitaDelCarrito(List<Pizza> carrito, Pizza pizza);
 	
 }

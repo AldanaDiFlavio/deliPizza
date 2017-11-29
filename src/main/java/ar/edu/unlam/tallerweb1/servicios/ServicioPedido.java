@@ -19,5 +19,8 @@ public interface ServicioPedido {
 	void actualizarPedido(Pedido pedido);
 
 	Pedido traerElPedidoEnDeliveryAsignadoAUnaMoto(Moto moto);
+
+	List<Pizza> generarPedidoParaMostrar(List<Pizza> carrito);
 	
+	Integer calcularPrecioTotalPorTodasLasPizzasDelPedido(List<Pizza> carrito);
 }

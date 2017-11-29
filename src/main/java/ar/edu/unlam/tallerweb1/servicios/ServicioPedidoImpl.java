@@ -66,7 +66,24 @@ public class ServicioPedidoImpl implements ServicioPedido {
 	public Pedido traerElPedidoEnDeliveryAsignadoAUnaMoto(Moto moto) {
 		return servicioPedidoDao.traerElPedidoEnDeliveryAsignadoAUnaMoto(moto);
 	}
+
+	@Override
+	public List<Pizza> generarPedidoParaMostrar(List<Pizza> carrito) {
+		List<Pizza> pedidoAMostrar = new LinkedList<Pizza>();
+		for (Pizza p : carrito) {
+			pedidoAMostrar.add(p);
+		}
+		return pedidoAMostrar;
+	}
 	
+	@Override
+	public Integer calcularPrecioTotalPorTodasLasPizzasDelPedido(List<Pizza> carrito) {
+		Integer preciototalportodaslaspizzas = 0;
+		for (Pizza p : carrito) {
+			preciototalportodaslaspizzas = preciototalportodaslaspizzas + (p.getPrecio() * p.getCantidad());
+		}
+		return preciototalportodaslaspizzas;
+	}
 	
 }
 

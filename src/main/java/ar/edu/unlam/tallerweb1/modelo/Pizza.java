@@ -21,25 +21,21 @@ public class Pizza {
 	private Integer tcoccion;	
 	private Integer cantidad;
 	private Integer preciototal;
-	private Boolean aniadida;
-	private Boolean tamanio;
-	private String aclaracion;	
+	private String tamanio;
 	private List<Ingrediente> listaIngrediente = new LinkedList<Ingrediente>();
 	
 	public Pizza() {
 		super();
 	}
 		
-	public Pizza(Long id, String nombre, String imagen, Integer precio, Integer tcoccion, Boolean tamanio,
-			String aclaracion, List<Ingrediente> listaIngrediente) {
+	public Pizza(Long id, String nombre, String imagen, Integer precio, Integer tcoccion, String tamanio, List<Ingrediente> listaIngrediente) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.imagen = imagen;
 		this.precio = precio;
 		this.tcoccion = tcoccion;
-		this.tamanio = tamanio;
-		this.aclaracion = aclaracion;
+		this.setTamanio(tamanio);
 		this.listaIngrediente = listaIngrediente;
 	}
 
@@ -69,12 +65,6 @@ public class Pizza {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public Boolean getTamanio() {
-		return tamanio;
-	}
-	public void setTamanio(Boolean tamanio) {
-		this.tamanio = tamanio;
-	}
 	
 	public String getImagen() {
 		return imagen;
@@ -95,15 +85,7 @@ public class Pizza {
 	public void setTcoccion(Integer tcoccion) {
 		this.tcoccion = tcoccion;
 	}
-
-	public String getAclaracion() {
-		return aclaracion;
-	}
-
-	public void setAclaracion(String aclaracion) {
-		this.aclaracion = aclaracion;
-	}
-
+	
 	public Integer getCantidad() {
 		return cantidad;
 	}
@@ -112,20 +94,20 @@ public class Pizza {
 		this.cantidad = cantidad;
 	}
 
-	public Boolean getAniadida() {
-		return aniadida;
-	}
-
-	public void setAniadida(Boolean aniadida) {
-		this.aniadida = aniadida;
-	}
-
 	public Integer getPreciototal() {
 		return preciototal;
 	}
 
 	public void setPreciototal(Integer preciototal) {
 		this.preciototal = preciototal;
+	}
+
+	public String getTamanio() {
+		return tamanio;
+	}
+
+	public void setTamanio(String tamanio) {
+		this.tamanio = tamanio;
 	}
 		
 }

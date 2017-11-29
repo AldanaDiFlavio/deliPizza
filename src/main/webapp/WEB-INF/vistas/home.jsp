@@ -53,23 +53,17 @@
 
 									<form:form method="POST" modelAttribute="lapizza"
 										action="aniadirCarrito">
-										<form:input path="nombre" name="nombre" type="hidden"
-											value="${listaPizzas.nombre} " />
+										<form:input path="id" name="id" type="hidden"
+											value="${listaPizzas.id} " />
 										<form:select path="cantidad" class="form-control">
 											<c:forEach var="cantidadPizzas" begin="1" end="20">
 												<form:option value="${cantidadPizzas}">${cantidadPizzas}</form:option>
 											</c:forEach>
 										</form:select>
-										<c:choose>
-											<c:when test="${listaPizzas.aniadida == true}">
-												<button type="submit" class="btn btn-warning">Modificar
-													mi Pedido</button>
-											</c:when>
-											<c:otherwise>
+										
 												<button type="submit" class="btn btn-warning">Agregar
 													a mi Pedido</button>
-											</c:otherwise>
-										</c:choose>
+											
 									</form:form>
 								</div>
 							</c:forEach>
@@ -131,7 +125,7 @@
 												<div class="price" style="display: block;">Cantidad:
 													${pizzaspedidas.cantidad}</div>
 												<div class="name">
-													<a href="quitarDelCarrito?nombre=${pizzaspedidas.nombre}">REMOVER</a>
+													<a href="quitarDelCarrito?id=${pizzaspedidas.id}">REMOVER</a>
 												</div>
 												<hr>
 
