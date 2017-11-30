@@ -75,7 +75,7 @@ public class TestPedido extends SpringTest {
 
 		/* Validacion */
 
-		assertThat(pedido.getEstado()).isEqualTo("EnEspera");
+		assertThat(pedido.getEstado()).isEqualTo("EnEsperaXXX");
 
 	}
 }
