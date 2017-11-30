@@ -60,10 +60,10 @@
 												<form:option value="${cantidadPizzas}">${cantidadPizzas}</form:option>
 											</c:forEach>
 										</form:select>
-
-										<button type="submit" class="btn btn-warning">Agregar
-											a mi Pedido</button>
-
+										
+												<button type="submit" class="btn btn-warning">Agregar
+													a mi Pedido</button>
+											
 									</form:form>
 								</div>
 							</c:forEach>

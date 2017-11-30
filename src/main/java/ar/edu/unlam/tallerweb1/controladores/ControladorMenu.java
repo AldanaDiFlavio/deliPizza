@@ -66,6 +66,16 @@ public class ControladorMenu {
 
 			modelo.put("pedidorealizado", pedidos);
 		}
+		
+		Moto moto = servicioMoto.consultarSiHayMotosLibres();
+
+		if (moto.getEstado().equals("Ocupada")) {
+			
+			Integer promedioDeDemora = servicioPedido.traerDemoraDePedidosEnDelivery();
+			modelo.put("nohaymotos", promedioDeDemora);
+
+		}
+		
 		return new ModelAndView("home", modelo);
 	}
 
@@ -153,6 +163,15 @@ public class ControladorMenu {
 		Integer preciototalportodaslaspizzas = servicioPedido.calcularPrecioTotalPorTodasLasPizzasDelPedido(carrito);
 
 		modelo.put("preciototalportodaslaspizzas", preciototalportodaslaspizzas);
+		
+		Moto moto = servicioMoto.consultarSiHayMotosLibres();
+
+		if (moto.getEstado().equals("Ocupada")) {
+			
+			Integer promedioDeDemora = servicioPedido.traerDemoraDePedidosEnDelivery();
+			modelo.put("nohaymotos", promedioDeDemora);
+
+		}
 
 		modelo.put("pedido", pedido);
 

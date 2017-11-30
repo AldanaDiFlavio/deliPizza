@@ -37,13 +37,17 @@
 								<p class="lead">SU PEDIDO:</p>
 
 								<hr>
+								<c:if test="${not empty nohaymotos}">
+									<p class="label-danger">ATENCION!! Todas nuestras motos
+										estan ocupadas, proxima en aproximadamente: ${nohaymotos}
+										minutos que se sumaran a la demora de entrega informada por el
+										sistema. Desde ya le pedimos disculpas. DeliPizza.</p>
+								</c:if>
 								<%--    --%>
 								<p class="lead">Precio Total: $
 									${preciototalportodaslaspizzas}</p>
 
 								<p class="lead">Pago efectivo en puerta</p>
-
-
 
 							</div>
 							<div class="col-lg-7" class="lead">
@@ -81,9 +85,13 @@
 						<div class="hidden" id="map">MAP</div>
 
 						<div style="visibility: hidden;" id="mapa">
-							<div class="lead">
+							<p class="lead">Preparacion: 20 minutos</p>
+							<p class="lead" id="paracalcular">
 								Demora delivey: <span id="duration"></span>
-							</div>
+							</p>
+							<p class="lead">
+								Entrega en: <span id="totaldeentrega"></span>
+							</p>
 							<div class="lead">¿Su dirección?</div>
 							<iframe id="ifra" width="100%" height="0" frameborder="0"
 								style="border: 0" allowfullscreen></iframe>
@@ -128,6 +136,7 @@
 								</c:choose>
 								</form:form>
 							</div>
+
 						</div>
 
 					</div>
@@ -353,7 +362,19 @@
 					vtelefono = true;
 				}
 				;
+				// Depues de el telefono calcula el total de la entrega
+				var total = 0;
 
+				var pizza = 20;
+
+				valor = document.confirform.f1t1.value;
+
+				valor = parseInt(valor);
+
+				total = (parseInt(total) + parseInt(valor) + parseInt(pizza));
+
+				document.getElementById('totaldeentrega').innerHTML = total
+						+ ' minutos';
 			});
 
 	function validar(e) {

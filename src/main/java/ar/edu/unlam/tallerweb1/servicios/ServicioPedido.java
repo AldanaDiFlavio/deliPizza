@@ -28,4 +28,6 @@ public interface ServicioPedido {
 
 	void siHayPedidosEnEsperaAsignarLaMotoQuelibere(Moto moto, List<Pedido> ListaDePedidosEnEspera);
 
+	Integer traerDemoraDePedidosEnDelivery();
+
 }

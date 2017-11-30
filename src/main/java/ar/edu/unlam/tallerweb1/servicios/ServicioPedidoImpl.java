@@ -42,10 +42,11 @@ public class ServicioPedidoImpl implements ServicioPedido {
 
 	@Override
 	public Pedido generarPedidoParaPersistirConLasPizzasDelPedido(Pedido pedido,
-			List<Pizza> pizzasDelPedidoParaPersistir) {
+			List<Pizza> pizzasDelPedidoParaPersistir) {		
 		Pedido pedidoParaPersistir = new Pedido();
+		pedido.setDemora(pedido.getDemora()+20);
 		pedidoParaPersistir.setSolicitante(pedido.getSolicitante());
-		pedidoParaPersistir.setDireccion(pedido.getDireccion());
+		pedidoParaPersistir.setDireccion(pedido.getDireccion());		
 		pedidoParaPersistir.setDemora(pedido.getDemora());
 		pedidoParaPersistir.setPrecio(pedido.getPrecio());
 		pedidoParaPersistir.setTelefono(pedido.getTelefono());
@@ -107,5 +108,21 @@ public class ServicioPedidoImpl implements ServicioPedido {
 		moto.setlistaPedido(listaPedidos);
 		servicioMoto.actualizarMoto(moto);
 	}
-
+	
+	@Override
+	public Integer traerDemoraDePedidosEnDelivery() {
+		Integer promedioDeDemora = 0;
+		List<Pedido> traerTodosLosPedidos = traerTodosLosPedidos();
+		List<Pedido> pedido = new LinkedList<Pedido>();
+		for (Pedido pedidos : traerTodosLosPedidos) {
+			if (pedidos.getEstado().equals("EnDelivery")) {
+				pedido.add(pedidos);
+			}
+		}
+		for (Pedido p : pedido) {
+			promedioDeDemora = (promedioDeDemora + p.getDemora()) ;
+		}
+		promedioDeDemora = promedioDeDemora / pedido.size();
+		return promedioDeDemora;
+	}
 }
