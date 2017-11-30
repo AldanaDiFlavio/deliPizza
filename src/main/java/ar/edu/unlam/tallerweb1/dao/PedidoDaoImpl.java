@@ -1,20 +1,21 @@
 package ar.edu.unlam.tallerweb1.dao;
 
-import ar.edu.unlam.tallerweb1.modelo.Moto;
-import ar.edu.unlam.tallerweb1.modelo.Pedido;
+import java.util.List;
+
+import javax.inject.Inject;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-import javax.inject.Inject;
+import ar.edu.unlam.tallerweb1.modelo.Moto;
+import ar.edu.unlam.tallerweb1.modelo.Pedido;
 
 @Repository("pedidoDao")
 public class PedidoDaoImpl implements PedidoDao {
 
+	
 	@Inject
 	private SessionFactory sessionFactory;
 

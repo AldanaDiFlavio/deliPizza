@@ -14,46 +14,44 @@ import ar.edu.unlam.tallerweb1.modelo.Moto;
 import ar.edu.unlam.tallerweb1.modelo.Pedido;
 import ar.edu.unlam.tallerweb1.servicios.ServicioMoto;
 
-public class TestMoto extends SpringTest  {
+public class TestPedido extends SpringTest {
 
 	@Inject
 	PedidoDao pedidoDao;
-	
+
 	@Inject
 	ServicioMoto servicioMoto;
-	
+
 	@Test
 	@Transactional
 	@Rollback(true)
-	public void TestQueVerificaQueUnaMotoEstaLibreSeLeAsignaAUnPedidoEnEspera() {
+	public void TestQueVerificaQueUnPedidoEstaEnEsperaYNoHayaMotosLibres() {
 
-		
 		Session session = getSession();
 
 		/* Preparacion */
-		 Moto motouno = new Moto();
-		 motouno.setId((long) 1);
-		 motouno.setPatente("A123BCD");
-		 motouno.setConductor("Jose Luis");
-		 motouno.setEstado("Ocupada");
-		 session.save(motouno);
-		
-		 Moto motodos = new Moto();
-		 motodos.setId((long) 2);
-		 motodos.setPatente("B124ACD");
-		 motodos.setConductor("Mario Lopez");
-		 motodos.setEstado("Ocupada");
-		 session.save(motodos);
-		
-		 Moto mototres = new Moto();
-		 mototres.setId((long) 3);
-		 mototres.setPatente("A353CBD");
-		 mototres.setConductor("Carlos Gimenez");
-		 mototres.setEstado("Libre");
-		 session.save(mototres);
-		
+		Moto motouno = new Moto();
+		motouno.setId((long) 1);
+		motouno.setPatente("A123BCD");
+		motouno.setConductor("Jose Luis");
+		motouno.setEstado("Ocupada");
+		session.save(motouno);
 
-		// Pedido moto 1
+		Moto motodos = new Moto();
+		motodos.setId((long) 2);
+		motodos.setPatente("B124ACD");
+		motodos.setConductor("Mario Lopez");
+		motodos.setEstado("Ocupada");
+		session.save(motodos);
+
+		Moto mototres = new Moto();
+		mototres.setId((long) 3);
+		mototres.setPatente("A353CBD");
+		mototres.setConductor("Carlos Gimenez");
+		mototres.setEstado("Ocupada");
+		session.save(mototres);
+
+		// Pedido 
 
 		Pedido pedido = new Pedido();
 
@@ -64,27 +62,20 @@ public class TestMoto extends SpringTest  {
 		pedido.setPrecio(350);
 		pedido.setEstado("EnEspera");
 		session.save(pedido);
-		
-//		pedidoDao.guardarPedido(pedido);
-
 
 		/* Ejecucion */
-	
-		
+
 		Moto moto = servicioMoto.consultarSiHayMotosLibres();
-		
+
 		if (moto.getEstado().equals("Libre")) {
 
 			servicioMoto.asignarMotoAPedido(moto, pedido);
 
 		}
-		
 
 		/* Validacion */
 
-		assertThat(pedido.getEstado()).isEqualTo("EnDelivery");
-		assertThat(pedido.getMoto()).isEqualTo(mototres);
+		assertThat(pedido.getEstado()).isEqualTo("EnEspera");
+
 	}
-
-
 }

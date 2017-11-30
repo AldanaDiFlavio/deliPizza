@@ -39,16 +39,13 @@
 
 
 								<div class="col-sm-4 col-sm-6" style="margin-bottom: 5%">
-									<img src="images/pizzas/${listaPizzas.imagen}"
+									<span>
+										<h3>${listaPizzas.nombre}</h3>
+									</span> <img src="images/pizzas/${listaPizzas.imagen}"
 										alt="imagen no encontrada" class="img-rounded img-responsive">
 									<span>
-										<h3>${listaPizzas.nombre}$${listaPizzas.precio}</h3>
+										<h3>${listaPizzas.precio}</h3>
 									</span>
-
-
-									<%-- <a href="aniadirCarrito/${listaPizzas.nombre}/5" class="btn btn-warning">Agregar a mi Pedido</a>	 --%>
-
-
 
 
 									<form:form method="POST" modelAttribute="lapizza"
@@ -60,10 +57,10 @@
 												<form:option value="${cantidadPizzas}">${cantidadPizzas}</form:option>
 											</c:forEach>
 										</form:select>
-										
-												<button type="submit" class="btn btn-warning">Agregar
-													a mi Pedido</button>
-											
+
+										<button type="submit" class="btn btn-warning">Agregar
+											a mi Pedido</button>
+
 									</form:form>
 								</div>
 							</c:forEach>

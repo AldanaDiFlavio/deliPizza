@@ -39,15 +39,15 @@
 
 												<c:forEach items="${motosocupadas}" var="motosocupadas">
 													<tr align="left">
-														<th><span class="lead bg-danger">${motosocupadas.patente}</span></th>
-														<th><span class="lead bg-danger">${motosocupadas.conductor}</span></th>
+														<th><span class="lead">${motosocupadas.patente}</span></th>
+														<th><span class="lead">${motosocupadas.conductor}</span></th>
 														<c:forEach items="${motosocupadas.listaPedido}"
 															var="listaPedido">
-															<th><span class="lead bg-info">${listaPedido.direccion}</span></th>
-															<th><span class="lead bg-info">${listaPedido.solicitante}</span></th>
-															<th><span class="lead bg-info">${listaPedido.telefono}</span></th>
-															<th><span class="lead bg-info">${listaPedido.demora}</span></th>
-															<th><span class="lead bg-info">${listaPedido.precio}</span></th>
+															<th><span class="lead">${listaPedido.direccion}</span></th>
+															<th><span class="lead">${listaPedido.solicitante}</span></th>
+															<th><span class="lead">${listaPedido.telefono}</span></th>
+															<th><span class="lead">${listaPedido.demora}</span></th>
+															<th><span class="lead">${listaPedido.precio}</span></th>
 														</c:forEach>
 														<td><a
 															href="liberar-moto?patente=${motosocupadas.patente}"
@@ -77,11 +77,11 @@
 											<tbody>
 												<c:forEach items="${pedidosenespera}" var="i">
 													<tr>
-														<th><span class="lead bg-danger">${i.solicitante}</span></th>
-														<th><span class="lead bg-danger">${i.direccion}</span></th>
-														<th><span class="lead bg-danger">${i.telefono}</span></th>
-														<th><span class="lead bg-danger">${i.demora}</span></th>
-														<th><span class="lead bg-danger">${i.precio}</span></th>
+														<th><span class="lead">${i.solicitante}</span></th>
+														<th><span class="lead">${i.direccion}</span></th>
+														<th><span class="lead">${i.telefono}</span></th>
+														<th><span class="lead">${i.demora}</span></th>
+														<th><span class="lead">${i.precio}</span></th>
 													</tr>
 												</c:forEach>
 											</tbody>
@@ -104,8 +104,8 @@
 													<tbody>
 														<c:forEach items="${motoslibres}" var="motoslibres">
 															<tr>
-																<th><span class="lead bg-danger">${motoslibres.patente}</span></th>
-																<th><span class="lead bg-danger">${motoslibres.conductor}</span></th>
+																<th><span class="lead">${motoslibres.patente}</span></th>
+																<th><span class="lead">${motoslibres.conductor}</span></th>
 																<c:choose>
 																	<c:when test="${not empty motoslibres.listaPedido}">
 
@@ -161,13 +161,13 @@
 											<c:forEach items="${motoslibres.listaPedido}"
 												var="listaPedido">
 												<h3>Pedido ${listaPedido.estado}</h3>
-												<span class="lead bg-info">${listaPedido.solicitante}
+												<span class="lead">${listaPedido.solicitante}
 													/</span>
-												<span class="lead bg-success">
+												<span class="lead">
 													${listaPedido.direccion} /</span>
-												<span class="lead bg-warning">
+												<span class="lead">
 													${listaPedido.telefono} /</span>
-												<span class="lead bg-primary"> $${listaPedido.precio}</span>
+												<span class="lead"> $${listaPedido.precio}</span>
 												<hr>
 											</c:forEach>
 										</c:when>

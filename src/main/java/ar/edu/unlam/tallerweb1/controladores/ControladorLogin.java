@@ -62,26 +62,13 @@ public class ControladorLogin {
 		ModelMap model = new ModelMap();
 
 		// invoca el metodo consultarUsuario del servicio y hace un redirect a
-		// la URL /home, esto es, en lugar de enviar a una vista
+		// la URL /login, esto es, en lugar de enviar a una vista
 		// hace una llamada a otro action a través de la URL correspondiente a
 		// ésta
 		Usuario usuarioBuscado = servicioLogin.consultarUsuario(usuario);
 		if (usuarioBuscado != null) {
 			request.getSession().setAttribute("usuario", usuarioBuscado);
-			// request el http de request
-			// Modela un objeto de
-			// Quien crea el request
-			// HTTPREQUEST que es un objeto complejo que viene de la peticion
-			// http
-			// esta asociado una session
-			// recibe lo que ingresa una persona en el formulario
-			// Toma rol de usuario mete en la session y regirige al login
-			// Probar este metodo
-			// Probar el controlador
-			// Usuario invalido?
-			// Usuario existe?
-			// Fijarme si va a la pantalla login y que en modelo variable error
-			// con ese valor
+
 			model.put("usuario", usuarioBuscado);
 
 			return new ModelAndView("redirect:/administrar");
